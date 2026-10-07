@@ -22,6 +22,7 @@ let serverClockReady = false;
 const CHAT_MESSAGE_TTL_MS = 24 * 60 * 60 * 1000;
 const LISTENER_SESSION_TTL_MS = 90 * 1000;
 let firebaseSignInAnonymously = null;
+let anonymousSignInPromise = null;
 let firebaseGoogleAuthProvider = null;
 let firebaseSignInWithPopup = null;
 let firebaseSignInWithRedirect = null;
@@ -163,7 +164,7 @@ async function initializeFirebase() {
         state.ready = Boolean(app && database && auth && state.databaseRootRef && (isAdminPage || state.userId));
 
         if (!isAdminPage && state.userId) {
-            console.info("Anonymous auth ready.");
+            console.info("Firebase auth ready.");
         }
 
         if (isAdminPage) {
@@ -246,14 +247,22 @@ function hasPlaceholderConfig(firebaseConfig) {
 
 export async function signInAnonymousUser() {
     if (!auth || !firebaseSignInAnonymously) return null;
+    // Persisted Google or visitor sessions may still be loading on a new page.
+    if (typeof auth.authStateReady === "function") await auth.authStateReady();
     if (auth.currentUser) {
         state.userId = auth.currentUser.uid;
         return auth.currentUser;
     }
 
-    const credential = await firebaseSignInAnonymously(auth);
-    state.userId = credential.user ? credential.user.uid : null;
-    return credential.user || null;
+    if (!anonymousSignInPromise) {
+        anonymousSignInPromise = firebaseSignInAnonymously(auth).then((credential) => {
+            state.userId = credential.user ? credential.user.uid : null;
+            return credential.user || null;
+        }).finally(() => {
+            anonymousSignInPromise = null;
+        });
+    }
+    return anonymousSignInPromise;
 }
 
 export function getCurrentUserId() {
@@ -419,10 +428,12 @@ export async function createTemporaryStationWithFirstTrack(station, track) {
         createdBy: user.uid
     };
     const stationRef = databasePush(databaseRef(database, "temporaryStations"));
-    await databaseSet(stationRef, safeStation);
-
     const trackRef = databasePush(databaseRef(database, `temporaryStations/${stationRef.key}/tracks`));
-    await databaseSet(trackRef, track);
+    // Commit both together so a rejected track cannot leave an empty channel.
+    await databaseSet(stationRef, {
+        ...safeStation,
+        tracks: { [trackRef.key]: track }
+    });
 
     return {
         ...safeStation,
