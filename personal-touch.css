@@ -1,0 +1,248 @@
+/* The quote keeps its reading direction; its home stays at the physical right. */
+@font-face {
+  font-family: "Handjet Renner";
+  src: url("assets/fonts/Handjet-variable.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+body .content-footer.has-renner-quote,
+html[dir="rtl"] body .content-footer.has-renner-quote,
+body.quote-experience-on.focus-mode .content-footer.has-renner-quote,
+body.quote-experience-on[data-listening-mode="neon"] .content-footer.has-renner-quote,
+html[dir="rtl"] body.quote-experience-on.focus-mode .content-footer.has-renner-quote,
+html[dir="rtl"] body.quote-experience-on[data-listening-mode="neon"] .content-footer.has-renner-quote {
+  direction: ltr;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-areas: "creator quote";
+  align-items: end;
+  text-align: right;
+  gap: 8px 32px;
+}
+body .renner-quote-slot,
+html[dir="rtl"] body .renner-quote-slot {
+  grid-area: quote;
+  justify-self: end;
+  align-self: end;
+  display: grid;
+  grid-template-columns: 18px minmax(0, auto);
+  column-gap: 11px;
+  row-gap: 0;
+  align-items: center;
+  justify-content: end;
+  width: fit-content;
+  max-width: min(840px, 100%);
+}
+body .renner-quote-slot::before {
+  content: "";
+  grid-column: 1;
+  grid-row: 1;
+  width: 18px;
+  height: 18px;
+  align-self: center;
+  background: url("assets/icons/quote-friend.svg") center / contain no-repeat;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 0 5px rgba(var(--display-rgb), .24));
+}
+body .renner-quote-line { grid-column: 2; grid-row: 1; width: auto; }
+body .renner-quote-text {
+  font-family: "Handjet Renner", "Cairo", sans-serif;
+  /* Handjet's ELSH=2 is the square default; ELSH=0 is intentionally blank. */
+  font-variation-settings: "ELGR" 1, "ELSH" 2;
+  font-weight: 600;
+  font-size: 25px;
+  line-height: 1.45;
+  letter-spacing: 0;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  color: #f4efff;
+  text-shadow: 1px 1px #0c0828, 0 0 10px #d4bef224;
+}
+body .renner-quote-slot[dir="rtl"] .renner-quote-text { line-height: 1.45; }
+body .renner-quote-credit {
+  grid-column: 2;
+  grid-row: 2;
+  justify-self: stretch;
+  justify-content: flex-end;
+  direction: ltr;
+  font-size: 11px;
+  line-height: 1.5;
+  color: #b8afca;
+  padding: 0 0 1px;
+}
+body .renner-quote-credit::before { content: none; }
+body .renner-quote-credit .quote-source-arrow { font-size: 10px; color: #d6c6e9; opacity: .75; }
+body .renner-quote-text.is-typing::after { width: 3px; height: .7em; border-radius: 0; box-shadow: none; }
+
+/* The signature owns the physical left; reading direction stays local. */
+body .creator-credit {
+  grid-area: creator;
+  justify-self: start;
+  width: fit-content;
+  min-width: 0;
+  direction: ltr;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  align-self: end;
+  flex-wrap: wrap;
+  gap: 5px;
+  max-width: 100%;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #a9a1ba;
+}
+html[dir="rtl"] body .creator-credit { direction: rtl; justify-content: flex-end; }
+body .content-footer.has-renner-quote > .community-status { grid-column: 1; grid-row: 2; justify-self: start; }
+body:not(.focus-mode):not([data-listening-mode="neon"]) .renner-quote-slot { grid-row: 1 / span 2; }
+body .creator-credit > span:not(.creator-divider) { white-space: nowrap; }
+body .creator-heart { color: #ef88ad; font-size: 10px; filter: none; margin-inline: 1px; }
+body .creator-github,
+body .creator-coffee {
+  min-height: 28px;
+  padding: 2px 5px;
+  gap: 6px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+body .creator-github { color: #ece4f8; }
+body .creator-github bdi { font-size: 12px; font-weight: 500; }
+body .creator-github i { font-size: 15px; }
+body .creator-github:hover,
+body a.creator-coffee:hover { background: #be9ce10d; transform: none; }
+body .creator-divider { width: 1px; height: 12px; margin-inline: 5px; background: #9286a84a; color: transparent; overflow: hidden; }
+body .creator-coffee:disabled { color: #a89db2; }
+body .creator-coffee i { color: #d4b18b; font-size: 13px; }
+
+/* A fine illuminated rail echoes the dial needle without reducing its touch area. */
+body.radio-spatial-ready #radioTunerDock #stationTunerRange {
+  left: 34px;
+  right: 34px;
+  width: calc(100% - 68px);
+  height: 30px;
+  min-height: 30px;
+  border-radius: 6px;
+  background: transparent;
+  cursor: ew-resize;
+}
+body.radio-spatial-ready #radioTunerDock #stationTunerRange::-webkit-slider-runnable-track {
+  height: 4px;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--display-bright) 0%, rgb(var(--display-rgb)) var(--tuner-progress, 0%), #a7b3d333 var(--tuner-progress, 0%), #a7b3d333 100%);
+  box-shadow: 0 1px 2px #040714c9, 0 0 6px rgba(var(--display-rgb), .14);
+}
+body.radio-spatial-ready #radioTunerDock #stationTunerRange::-moz-range-track {
+  height: 4px;
+  border: 0;
+  border-radius: 999px;
+  background: #a7b3d333;
+  box-shadow: 0 1px 2px #040714c9;
+}
+body.radio-spatial-ready #radioTunerDock #stationTunerRange::-moz-range-progress {
+  height: 4px;
+  border-radius: 999px;
+  background: rgb(var(--display-rgb));
+  box-shadow: 0 0 6px rgba(var(--display-rgb), .2);
+}
+body.radio-spatial-ready #radioTunerDock #stationTunerRange::-webkit-slider-thumb {
+  box-sizing: border-box;
+  width: 12px;
+  height: 18px;
+  margin-top: -7px;
+  border: 1px solid #f8f7ff;
+  border-radius: 4px;
+  background: linear-gradient(90deg, transparent 44%, #10172e66 44%, #10172e66 56%, transparent 56%), linear-gradient(180deg, #fcfbff, var(--display-bright));
+  box-shadow: 0 0 0 3px rgba(var(--display-rgb), .08), 0 0 10px rgba(var(--display-rgb), .35), 0 2px 3px #02040da6;
+}
+body.radio-spatial-ready #radioTunerDock #stationTunerRange::-moz-range-thumb {
+  box-sizing: border-box;
+  width: 12px;
+  height: 18px;
+  border: 1px solid #f8f7ff;
+  border-radius: 4px;
+  background: linear-gradient(90deg, transparent 44%, #10172e66 44%, #10172e66 56%, transparent 56%), linear-gradient(180deg, #fcfbff, var(--display-bright));
+  box-shadow: 0 0 0 3px rgba(var(--display-rgb), .08), 0 0 10px rgba(var(--display-rgb), .35), 0 2px 3px #02040da6;
+}
+body.radio-spatial-ready #radioTunerDock #stationTunerRange:focus-visible {
+  outline: 2px solid var(--display-bright);
+  outline-offset: 3px;
+  box-shadow: none;
+}
+body.radio-spatial-ready #radioTunerDock #stationTunerRange:hover::-webkit-slider-thumb,
+body.radio-spatial-ready #radioTunerDock #stationTunerRange:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 3px rgba(var(--display-rgb), .15), 0 0 13px rgba(var(--display-rgb), .45), 0 2px 3px #02040da6;
+}
+
+/* A phone or short viewport can scroll through the real controls in order.
+   The portaled receiver stays the same DOM node; ordinary receivers stay
+   inside their chassis. No fixed dock covers the frequency control below. */
+@media (max-width: 1080px), (max-height: 540px) {
+  body.radio-spatial-ready.quote-experience-on #mainContent { padding-bottom: 0; }
+  body.radio-spatial-ready #mainContent > .player-bar {
+    position: relative;
+    inset: auto;
+    transform: none;
+    order: 4;
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 1120px;
+    margin: 16px auto 0;
+  }
+  body.radio-spatial-ready[data-listening-mode="neon"] #mainContent > .player-bar { margin-top: 48px; }
+  body.radio-spatial-ready #mainContent > .content-footer.has-renner-quote,
+  html[dir="rtl"] body.radio-spatial-ready #mainContent > .content-footer.has-renner-quote {
+    position: relative;
+    inset: auto;
+    order: 5;
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 100%;
+    margin: 12px 0 0;
+    padding: 0 0 max(14px, env(safe-area-inset-bottom));
+    visibility: visible;
+  }
+}
+@media (max-width: 700px) {
+  body:not(.focus-mode):not([data-listening-mode="neon"]) .renner-quote-slot { grid-area: quote; }
+  body .content-footer.has-renner-quote > .community-status { grid-row: 3; }
+  body .content-footer.has-renner-quote,
+  html[dir="rtl"] body .content-footer.has-renner-quote,
+  body.quote-experience-on.focus-mode .content-footer.has-renner-quote,
+  body.quote-experience-on[data-listening-mode="neon"] .content-footer.has-renner-quote,
+  html[dir="rtl"] body.quote-experience-on.focus-mode .content-footer.has-renner-quote,
+  html[dir="rtl"] body.quote-experience-on[data-listening-mode="neon"] .content-footer.has-renner-quote {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "quote" "creator";
+    row-gap: 8px;
+  }
+  body .renner-quote-slot { grid-template-columns: 15px minmax(0, auto); column-gap: 8px; max-width: 100%; }
+  body .renner-quote-slot::before { width: 15px; height: 15px; }
+  body .renner-quote-text { font-size: 22px; }
+  body .creator-credit { gap: 4px; font-size: 11px; }
+  body .creator-github bdi { font-size: 11px; }
+  body .creator-github, body .creator-coffee { padding-inline: 3px; }
+  body .creator-divider { margin-inline: 2px; }
+  body.radio-spatial-ready #radioTunerDock #stationTunerRange { left: 24px; right: 24px; width: calc(100% - 48px); }
+}
+@media (max-width: 360px) {
+  body .renner-quote-text { font-size: 20px; }
+  body .creator-credit { column-gap: 3px; }
+}
+@media (max-height: 540px) and (min-width: 560px) {
+  body .renner-quote-text { font-size: 19px; line-height: 1.25; }
+  body .renner-quote-slot[dir="rtl"] .renner-quote-text { line-height: 1.25; }
+  body .renner-quote-slot { grid-template-columns: 14px minmax(0, auto); column-gap: 7px; }
+  body .renner-quote-slot::before { width: 14px; height: 14px; }
+  body .renner-quote-credit, body .creator-credit { font-size: 10px; }
+  body .creator-github, body .creator-coffee { min-height: 22px; }
+}
+@media (prefers-contrast: more) {
+  body .renner-quote-text { color: #fff; text-shadow: 1px 1px #000; }
+  body .renner-quote-credit, body .creator-credit { color: #eee6ff; }
+  body.radio-spatial-ready #radioTunerDock #stationTunerRange::-webkit-slider-runnable-track { background: linear-gradient(90deg, #fff var(--tuner-progress, 0%), #8d9cbf var(--tuner-progress, 0%)); }
+  body.radio-spatial-ready #radioTunerDock #stationTunerRange::-moz-range-track { background: #8d9cbf; }
+  body.radio-spatial-ready #radioTunerDock #stationTunerRange::-moz-range-progress { background: #fff; }
+}

@@ -1,0 +1,112 @@
+/* Desktop physical coordinates deliberately do not mirror when reading Arabic. */
+body.radio-spatial-ready { overflow-x: clip; }
+html:has(body.radio-spatial-ready) { overflow-x: clip; }
+body.radio-spatial-ready { --radio-dial-width: clamp(350px, 24vw, 420px); --radio-spatial-top: 132px; --radio-spatial-reserve: calc(var(--renner-quote-footer-height, 70px) + var(--renner-player-bar-height, 150px) + 68px); --radio-dial-height: clamp(220px, calc(100dvh - var(--radio-spatial-top) - var(--radio-spatial-reserve)), 350px); }
+body.radio-spatial-ready #radioTunerDock { position: fixed; z-index: 64; right: 24px; left: auto; top: calc((100dvh + var(--radio-spatial-top) - var(--radio-spatial-reserve)) / 2); transform: translateY(-50%); width: var(--radio-dial-width); direction: ltr; }
+body.radio-spatial-ready.focus-mode .player-bar,
+body.radio-spatial-ready[data-listening-mode="neon"] .player-bar { position: fixed; z-index: 68; }
+body.radio-spatial-ready #stationTuner { width: 100%; max-width: none; height: var(--radio-dial-height); margin: 0; direction: ltr; }
+body.radio-spatial-ready #stationTuner::before { content: ""; position: absolute; z-index: -1; inset: -12px -18px; border: 0; border-radius: 50%; background: radial-gradient(ellipse at 52% 44%, #030812d9 0%, #040918bf 39%, #050a1a78 59%, #050a1a26 72%, transparent 82%); filter: blur(9px); pointer-events: none; }
+body.radio-spatial-ready .station-tuner-scale { height: calc(var(--radio-dial-height) - 60px); }
+body.radio-spatial-ready .station-tuner-scale canvas { height: 100%; }
+body.radio-spatial-ready .station-tuner-readout { top: calc((var(--radio-dial-height) - 60px) / 2 - 40px); left: 51%; right: 2px; direction: ltr; align-items: flex-start; gap: 6px; }
+body.radio-spatial-ready #stationTunerName { font-size: 12px; max-width: 100%; color: #edf5ff; text-shadow: 0 2px 4px #02050f; unicode-bidi: plaintext; }
+body.radio-spatial-ready #stationTunerFrequency { font-size: clamp(49px, 4.1vw, 66px); line-height: 1; letter-spacing: -2px; text-shadow: 0 2px 4px #02050f, 0 0 13px rgba(var(--display-rgb), .65), 0 0 27px rgba(var(--display-rgb), .3); }
+body.radio-spatial-ready .station-tuner-band { font-size: 14px; letter-spacing: 3px; text-shadow: 0 2px 4px #02050f, 0 0 9px rgba(var(--display-rgb), .4); }
+body.radio-spatial-ready .station-tuner-position { font-size: 11px; color: #d1deef; opacity: 1; text-shadow: 0 2px 4px #02050f; }
+body.radio-spatial-ready #stationTunerRange { bottom: 29px; left: 25px; right: 25px; width: calc(100% - 50px); height: 30px; min-height: 30px; touch-action: pan-y; border-radius: 10px; }
+body.radio-spatial-ready #stationTunerRange::-webkit-slider-runnable-track { height: 6px; border: 1px solid #ddecff24; border-radius: 999px; background: linear-gradient(90deg, var(--display-bright) 0%, rgb(var(--display-rgb)) var(--tuner-progress, 0%), #34415d var(--tuner-progress, 0%), #34415d 100%); box-shadow: inset 0 1px 2px #02050fc9, 0 0 8px #02050f; }
+body.radio-spatial-ready #stationTunerRange::-moz-range-track { height: 6px; border: 1px solid #ddecff24; border-radius: 999px; background: #34415d; box-shadow: inset 0 1px 2px #02050fc9, 0 0 8px #02050f; }
+body.radio-spatial-ready #stationTunerRange::-moz-range-progress { height: 6px; border-radius: 999px; background: rgb(var(--display-rgb)); box-shadow: 0 0 10px rgba(var(--display-rgb), .35); }
+body.radio-spatial-ready #stationTunerRange::-webkit-slider-thumb { width: 16px; height: 24px; margin-top: -10px; border: 2px solid #eefaff; border-radius: 6px; background: linear-gradient(90deg, transparent 42%, #07122177 42%, #07122177 58%, transparent 58%), linear-gradient(180deg, #f4fdff, rgb(var(--display-rgb)) 70%); box-shadow: 0 0 0 4px rgba(var(--display-rgb), .13), 0 0 17px rgba(var(--display-rgb), .65), 0 2px 6px #02050f; }
+body.radio-spatial-ready #stationTunerRange::-moz-range-thumb { width: 12px; height: 20px; border: 2px solid #eefaff; border-radius: 6px; background: linear-gradient(90deg, transparent 42%, #07122177 42%, #07122177 58%, transparent 58%), linear-gradient(180deg, #f4fdff, rgb(var(--display-rgb)) 70%); box-shadow: 0 0 0 4px rgba(var(--display-rgb), .13), 0 0 17px rgba(var(--display-rgb), .65), 0 2px 6px #02050f; }
+body.radio-spatial-ready #stationTunerRange:focus-visible { outline: 2px solid var(--display-bright); outline-offset: 4px; box-shadow: 0 0 15px rgba(var(--display-rgb), .25); }
+body.radio-spatial-ready #stationTunerRange:disabled { opacity: .45; }
+body.radio-spatial-ready .station-tuner-help { font-size: 10px; bottom: 0; color: #cbd8ed; text-shadow: 0 2px 4px #02050f; }
+body.radio-spatial-ready #radioDrawerStack { position: fixed; z-index: 66; top: var(--radio-spatial-top); left: 76px; right: auto; bottom: var(--radio-spatial-reserve); display: flex; flex-direction: column; gap: 14px; width: 340px; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: rgba(var(--display-rgb), .3) transparent; }
+body.radio-spatial-ready[data-radio-panel-side="right"] #radioDrawerStack { right: calc(var(--radio-dial-width) + 80px); left: auto; }
+body.radio-spatial-ready #radioDrawerStack > #channelMenu,
+body.radio-spatial-ready #radioDrawerStack > #neonCommunityPanel { position: relative; display: flex; flex-direction: column; inset: auto; flex: 0 0 auto; width: 100%; min-width: 0; max-width: none; height: auto; max-height: none; margin: 0; padding: 10px; border: 1px solid #bdc8ec26; border-radius: 16px; background: #0c1027ba; backdrop-filter: blur(16px); overflow: hidden; visibility: visible; box-sizing: border-box; }
+body.radio-spatial-ready #radioDrawerStack > #neonCommunityPanel { gap: 10px; }
+body.radio-spatial-ready #channelMenuContent { display: flex; flex-direction: column; overflow: visible; }
+body.radio-spatial-ready #channelsListContainer { flex: none; max-height: min(40dvh, 460px); overflow-y: auto; }
+body.radio-spatial-ready #radioDrawerStack #channelMenu .mood-filters { display: flex; flex-wrap: wrap; width: 100%; gap: 4px; overflow: visible; padding-bottom: 0; }
+body.radio-spatial-ready #communityPanelContent { display: flex; flex-direction: column; max-height: min(43dvh, 480px); overflow-y: auto; gap: 12px; }
+body.radio-spatial-ready #radioDrawerStack > #channelMenu.panel-collapsed,
+body.radio-spatial-ready #radioDrawerStack > #neonCommunityPanel.panel-collapsed { height: 0; min-height: 0; max-height: 0; padding: 0; margin: 0; border-width: 0; opacity: 0; pointer-events: none; }
+body.radio-spatial-ready #radioDrawerStack > #channelMenu.panel-folding,
+body.radio-spatial-ready #radioDrawerStack > #neonCommunityPanel.panel-folding { max-height: none; opacity: 1; }
+body.radio-spatial-ready #neonCommunityPanel > .fold-panel-heading { padding: 0 5px; border: 0; background: none; backdrop-filter: none; }
+body.radio-spatial-ready #communityPanelContent > .neon-widget { padding: 12px 5px; border: 0; border-top: 1px solid #bdc8ec1b; border-radius: 0; background: none; box-shadow: none; }
+body.radio-spatial-ready #communityPanelContent .neon-widget h2 { color: #e4e6f3; font-size: 13px; }
+body.radio-spatial-ready #radioSideRail { position: fixed; z-index: 67; left: 18px; right: auto; top: calc(var(--radio-spatial-top) + 12px); display: flex; flex-direction: column; align-items: center; gap: 20px; width: 48px; direction: ltr; }
+body.radio-spatial-ready[data-radio-panel-side="right"] #radioSideRail { right: calc(var(--radio-dial-width) + 20px); left: auto; }
+.spatial-rail-arrow { position: relative; width: 48px; height: 64px; min-height: 64px; border: 0; background: transparent; color: var(--display-ink); }
+.spatial-rail-arrow .experience-fold-orbit { inset: 1px 6px 21px; }
+.spatial-rail-label { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); color: #d1d6ed; font: 500 10px/1.4 "Cairo", sans-serif; white-space: nowrap; }
+.spatial-rail-arrow:hover { color: var(--display-bright); }
+.radio-side-picker { display: flex; gap: 2px; width: 48px; }
+.radio-side-picker button { width: 23px; height: 32px; padding: 0; background: none; border: 0; color: #929bb6; font-size: 15px; border-bottom: 1px solid transparent; }
+.radio-side-picker button[aria-pressed="true"] { color: var(--display-bright); border-bottom-color: currentColor; text-shadow: 0 0 9px currentColor; }
+.radio-side-picker button:focus-visible { outline: 1px solid currentColor; outline-offset: 3px; }
+body.radio-spatial-ready[data-listening-mode="neon"] .neon-center { inset-inline: auto; left: 430px; right: calc(var(--radio-dial-width) + 54px); }
+body.radio-spatial-ready[data-radio-panel-side="right"][data-listening-mode="neon"] .neon-center { left: 40px; right: calc(var(--radio-dial-width) + 445px); }
+@media (min-width: 1081px) and (min-height: 541px) {
+ body.radio-spatial-ready:not(.focus-mode):not([data-listening-mode="neon"]) { --radio-spatial-reserve: calc(var(--renner-quote-footer-height, 70px) + 36px); }
+}
+@media (max-width: 1400px) and (min-width: 1081px) {
+ body.radio-spatial-ready { --radio-dial-width: 320px; }
+ body.radio-spatial-ready #radioDrawerStack { width: 290px; }
+ body.radio-spatial-ready[data-listening-mode="neon"] .neon-center { left: 378px; }
+ body.radio-spatial-ready[data-radio-panel-side="right"][data-listening-mode="neon"] .neon-center { left: 30px; right: calc(var(--radio-dial-width) + 390px); }
+}
+@media (min-width: 1081px) and (max-height: 760px) {
+ body.radio-spatial-ready { --radio-dial-height: clamp(200px, calc(100dvh - var(--radio-spatial-top) - var(--radio-spatial-reserve)), 260px); }
+ body.radio-spatial-ready #stationTunerFrequency { font-size: 49px; }
+}
+@media (max-width: 1080px), (max-height: 540px) {
+ body.radio-spatial-ready, body.radio-spatial-ready.focus-mode { overflow-y: auto; }
+ body.radio-spatial-ready #mainContent { display: flex; flex-direction: column; padding-bottom: var(--radio-spatial-reserve); }
+ body.radio-spatial-ready #radioDrawerStack > #channelMenu,
+ body.radio-spatial-ready #radioDrawerStack > #neonCommunityPanel { scroll-margin-top: var(--radio-spatial-top); scroll-margin-bottom: var(--radio-spatial-reserve); }
+ body.radio-spatial-ready.focus-mode:not([data-listening-mode="neon"]) #mainContent { padding-top: var(--radio-spatial-top); }
+ body.radio-spatial-ready #radioTunerDock { position: relative; top: auto; left: auto; right: auto; transform: none; order: 2; width: min(340px, calc(100% - 54px)); margin: 20px 0 20px auto; }
+ body.radio-spatial-ready #stationTuner { height: 270px; }
+ body.radio-spatial-ready .station-tuner-scale { height: 220px; }
+ body.radio-spatial-ready .station-tuner-readout { top: 75px; left: 50%; gap: 4px; }
+ body.radio-spatial-ready #stationTunerFrequency { font-size: 47px; }
+ body.radio-spatial-ready #stationTunerName { font-size: 10px; }
+ body.radio-spatial-ready .station-tuner-help { font-size: 9px; }
+ body.radio-spatial-ready #radioDrawerStack,
+ body.radio-spatial-ready[data-radio-panel-side="right"] #radioDrawerStack { position: relative; inset: auto; order: 3; width: calc(100% - 54px); margin: 0 0 0 54px; overflow: visible; gap: 12px; }
+ body.radio-spatial-ready[data-radio-panel-side="right"] #radioDrawerStack { margin: 0 54px 0 0; }
+ body.radio-spatial-ready #radioSideRail { top: var(--radio-spatial-top); left: 10px; right: auto; }
+ body.radio-spatial-ready[data-radio-panel-side="right"] #radioSideRail { right: 10px; left: auto; }
+ body.radio-spatial-ready #radioDrawerStack #channelsListContainer { flex: 0 0 auto; min-height: 0; max-height: min(50dvh, 420px); overflow-y: auto; overflow-x: hidden; }
+ body.radio-spatial-ready #radioDrawerStack #channelMenuContent { overflow: visible; }
+ body.radio-spatial-ready #communityPanelContent { max-height: min(50dvh, 420px); }
+ body.radio-spatial-ready #mainContent > .radio-stage { order: 1; }
+ body.radio-spatial-ready #mainContent > .content-footer { order: 4; }
+ body.radio-spatial-ready[data-listening-mode="neon"] .neon-center,
+ body.radio-spatial-ready[data-radio-panel-side="right"][data-listening-mode="neon"] .neon-center { left: 24px; right: 24px; }
+}
+/* A short desktop has too little height for fixed side controls and a full
+   tuning wheel. Keep them in the scrollable page above the receiver dock. */
+@media (min-width: 1081px) and (max-height: 540px) {
+ body.radio-spatial-ready.focus-mode #mainContent { padding-top: var(--radio-spatial-top); }
+ body.radio-spatial-ready #radioSideRail,
+ body.radio-spatial-ready[data-radio-panel-side="right"] #radioSideRail { position: relative; inset: auto; order: 0; flex-direction: row; width: max-content; max-width: 100%; gap: 14px; margin: 0 auto 12px 0; }
+ body.radio-spatial-ready[data-radio-panel-side="right"] #radioSideRail { margin: 0 0 12px auto; }
+ body.radio-spatial-ready #radioDrawerStack,
+ body.radio-spatial-ready[data-radio-panel-side="right"] #radioDrawerStack { width: min(420px, calc(100% - 54px)); }
+ body.radio-spatial-ready[data-radio-panel-side="right"] #radioDrawerStack { margin-left: auto; }
+}
+@media (max-width: 360px) {
+ body.radio-spatial-ready #stationTuner { height: 230px; }
+ body.radio-spatial-ready .station-tuner-scale { height: 180px; }
+ body.radio-spatial-ready .station-tuner-readout { top: 54px; }
+ body.radio-spatial-ready #stationTunerFrequency { font-size: 40px; letter-spacing: -1.4px; }
+ body.radio-spatial-ready #radioDrawerStack > #channelMenu,
+ body.radio-spatial-ready #radioDrawerStack > #neonCommunityPanel { padding: 7px; }
+}
+@media (prefers-reduced-motion: reduce) { .spatial-rail-arrow *, .radio-side-picker button { transition: none!important; animation: none!important; } }

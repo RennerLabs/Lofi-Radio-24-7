@@ -1,0 +1,328 @@
+/* Two listening spaces: a glass receiver and an uncluttered lo-fi scene. */
+:root {
+  --display-rgb: 128, 239, 176;
+  --display-ink: #c7ffe0;
+  --display-bright: #edfff5;
+  --display-muted: #aed4bd;
+  --vfd: var(--display-ink);
+  --vfd-bright: var(--display-bright);
+  --vfd-muted: var(--display-muted);
+  --dock-line: #e4edff26;
+  --dock-glass: #101824c2;
+}
+body[data-display-color='ice'] { --display-rgb: 128, 220, 255; --display-ink: #cff5ff; --display-bright: #f1fcff; --display-muted: #aecfdb; }
+body[data-display-color='amber'] { --display-rgb: 255, 191, 103; --display-ink: #ffe1ac; --display-bright: #fff6e5; --display-muted: #d7c3a2; }
+body[data-display-color='violet'] { --display-rgb: 192, 143, 255; --display-ink: #e7d0ff; --display-bright: #fbf3ff; --display-muted: #c8b7dd; }
+body[data-display-color='rose'] { --display-rgb: 255, 151, 187; --display-ink: #ffd5e5; --display-bright: #fff0f5; --display-muted: #dcb8c6; }
+
+/* The active space remains discoverable even in the immersive layout. */
+.site-header { min-width: 0; gap: 18px; height: 88px; }
+.header-note { font-size: 9px; letter-spacing: 1.5px; margin-inline-start: 0; }
+.brand-lockup, .frequency-readout, .frequency-dial, .playback-controls, .player-extras, .dial-control, .retro-meter { direction: ltr; }
+.listening-mode-switch { display: inline-flex; align-items: center; gap: 3px; padding: 4px; flex-shrink: 0; border: 1px solid #d9e4fa20; border-radius: 12px; background: #131b28a6; backdrop-filter: blur(18px); }
+.listening-mode-switch button { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 36px; padding: 0 13px; border: 1px solid transparent; border-radius: 8px; background: none; color: #bec8d9; font-size: 12px; font-weight: 500; white-space: nowrap; }
+.listening-mode-switch button:hover { color: #f5f3ff; background: #e2d6ff0b; }
+.listening-mode-switch button[aria-pressed='true'] { color: #f7edff; border-color: #e4d1ff25; background: linear-gradient(135deg,#e1cbff25,#bfa7eb14); box-shadow: inset 0 1px #ffffff12; }
+.header-actions { gap: 6px; margin-inline-start: auto; }
+.header-browse-button, .header-focus-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 13px; border: 1px solid #d9e4fa24; border-radius: 10px; background: #17213173; color: #edf0fa; font-size: 12px; white-space: nowrap; }
+.header-focus-button { width: 44px; padding: 0; }
+.header-focus-button span { display: none; }
+.header-actions .language-toggle { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 0 8px; border: 1px solid #d9e4fa24; border-radius: 10px; background: #17213173; color: #e7ddf6; font-size: 12px; font-weight: 600; white-space: nowrap; }
+.header-actions .language-toggle:hover { border-color: #dfc6ff5a; background: #312b4299; }
+.header-browse-button:hover, .header-focus-button:hover { border-color: #dfc6ff5a; background: #312b4299; }
+.header-actions > .icon-button, .header-room { border-color: #d9e4fa1a; background: #17213160; }
+.header-actions > .icon-button:hover, .header-room:hover { background: #ffffff10; }
+
+/* A lighter chassis, using the same geometry for each control group. */
+.radio-device { padding: 16px; border: 1px solid #d9e4fa32; border-radius: 22px; background: linear-gradient(125deg,#3440529e,#1a2432b5 48%,#2531429e); backdrop-filter: blur(24px) saturate(120%); box-shadow: inset 0 1px #ffffff1f,0 24px 70px #0005; }
+.radio-device::before { inset: 5px; border-color: #f1eaff09; border-radius: 17px; }
+.chassis-screw { opacity: .35; }
+.radio-screen { height: clamp(340px,48vh,600px); border: 1px solid #e4edff20; border-radius: 13px; box-shadow: inset 0 1px #ffffff14,0 4px 20px #03081435; }
+.radio-screen::after { border-radius: 12px; box-shadow: inset 0 0 30px #03071033; }
+.radio-screen::before { opacity: .035; }
+.scene-caption { background: #0b14218f; border-color: #f0f2ff26; color: #f1f4fa; }
+.scene-tool, .exit-focus-button { border-color: #f0f2ff26; background: #0b14218f; }
+.player-bar { display: grid; grid-template-columns: minmax(230px,1.25fr) minmax(190px,1fr) 164px 88px; align-items: center; gap: 22px; width: 100%; margin: 14px 0 0; padding: 17px 16px; border: 1px solid #eef1ff18; border-radius: 15px; background: #0b15245c; }
+.station-info, .meter-module, .transport-module, .dial-module { grid-column: auto; grid-row: auto; min-width: 0; }
+.receiver-lcd, .meter-module { height: 110px; min-height: 110px; border: 1px solid rgba(var(--display-rgb),.2); border-radius: 9px; background: linear-gradient(125deg,rgba(var(--display-rgb),.12),rgba(var(--display-rgb),.035)),#050d16ad; box-shadow: inset 0 1px 14px #0004,0 1px #ffffff08; }
+.receiver-lcd { padding: 11px 14px; }
+.receiver-lcd::after { background: repeating-linear-gradient(0deg,transparent 0 3px,rgba(var(--display-rgb),.5) 4px); opacity: .04; }
+.receiver-state { gap: 7px; }
+.receiver-light { background: rgba(var(--display-rgb),.45); }
+.playing .receiver-light { background: var(--display-ink); box-shadow: 0 0 8px rgba(var(--display-rgb),.6); }
+.station-label, .receiver-stereo, .meter-caption, .meter-axis { color: var(--display-muted); }
+.station-label { font-size: 9px; letter-spacing: 1px; }
+.receiver-stereo { font-size: 8px; }
+.frequency-readout { gap: 6px; margin: 4px 0 3px; color: var(--display-ink); text-shadow: 0 0 10px rgba(var(--display-rgb),.25); }
+.frequency-readout > #freqValue { font-size: 38px; }
+.frequency-readout small, .band-label { color: var(--display-ink); }
+.frequency-readout small { font-size: 10px; }
+.band-label { font-size: 20px; }
+.station-info h2 { max-width: 100%; overflow: hidden; color: var(--display-bright); font-size: 14px; font-weight: 600; white-space: nowrap; text-overflow: ellipsis; }
+.station-info p { overflow: hidden; color: var(--display-muted); font-size: 10px; white-space: nowrap; text-overflow: ellipsis; }
+.frequency-dial { margin-top: 8px; padding-top: 8px; }
+.frequency-dial::before { height: 5px; background: repeating-linear-gradient(90deg,#d7deed32 0 1px,transparent 1px 6px); }
+.frequency-scale { color: #a7b5cb; font-size: 10px; }
+.tuning-needle { height: 8px; background: var(--display-ink); box-shadow: 0 0 4px rgba(var(--display-rgb),.4); }
+.meter-module { padding: 10px 12px; }
+.meter-caption, .meter-axis { font-size: 8px; letter-spacing: .8px; }
+.meter-stereo { color: var(--display-ink); }
+.retro-meter { height: 61px; gap: 4px; margin: 8px 0 7px; }
+.meter-segment { background: rgba(var(--display-rgb),.13); }
+.meter-segment.is-lit { background: var(--display-bright); box-shadow: 0 0 4px rgba(var(--display-rgb),.28); }
+.meter-segment.is-lit:nth-child(n+6) { background: var(--display-ink); }
+.meter-segment.is-lit:nth-child(n+10) { background: rgb(var(--display-rgb)); box-shadow: 0 0 5px rgba(var(--display-rgb),.35); }
+.meter-peak { background: var(--display-bright); box-shadow: 0 0 4px rgba(var(--display-rgb),.4); }
+.transport-module { display: grid; justify-content: center; align-items: center; gap: 9px; padding: 0; }
+.transport-label { display: none; }
+.playback-controls, .player-extras { display: grid; grid-template-columns: repeat(3,48px); justify-content: center; align-items: center; gap: 8px; }
+.playback-controls .icon-button, .play-button, .player-extras .icon-button { width: 48px; height: 45px; border: 1px solid #e0e9ff24; border-radius: 10px; background: linear-gradient(#d7e4ff12,#d7e4ff06); box-shadow: inset 0 1px #ffffff0d,0 3px 8px #0002; color: #e5e9f6; font-size: 14px; }
+.play-button { background: linear-gradient(145deg,#eedaff,#c5a6e8); border-color: #f0dcff80; color: #2b203b; box-shadow: inset 0 1px #fff8,0 4px 14px #08081835; }
+.playback-controls .icon-button:hover, .player-extras .icon-button:hover { background: #e4d5ff1a; border-color: #e2caff61; }
+.play-button:hover { background: linear-gradient(145deg,#f7e9ff,#d8bff4); }
+.player-extras .icon-button[aria-pressed='true'] { color: #efdbff; border-color: #e2caff61; background: #dac7ff16; }
+.dial-module { display: flex; flex-direction: column; gap: 7px; align-items: center; justify-content: center; }
+.dial-label { color: #bdc9dc; font-size: 8px; letter-spacing: 1.2px; }
+.dial-control { width: 69px; height: 69px; border-color: #0e1724; background: repeating-conic-gradient(#7583997a 0deg 2deg,#212f4280 2deg 6deg); box-shadow: 0 5px 13px #0307125e,0 0 0 2px #dde5ff0f,inset 0 1px #e1eaff3a; }
+.dial-control::after { inset: 6px; border-color: #cad5ef3d; background: linear-gradient(145deg,#71839b5c,#35425c80 52%,#1d2b4480); box-shadow: inset 0 1px #e8e8ff25; }
+.dial-indicator::before { background: #f0ddff; top: 10px; height: 10px; }
+.dial-module output { color: #dce4f2; font-size: 10px; }
+.chassis-signature { margin: 10px 5px 0; color: #98a8c0; font-size: 7px; letter-spacing: 1.4px; }
+
+/* Immersive by default: the scene is the canvas and the dock floats above it. */
+.focus-mode .site-header { visibility: visible; position: fixed; z-index: 70; top: max(18px,env(safe-area-inset-top)); inset-inline: 0; margin-inline: auto; transform: none; width: min(1280px,calc(100% - 64px)); height: 58px; padding: 0 13px; border: 1px solid #e5edff1b; border-radius: 15px; background: #0a122080; backdrop-filter: blur(20px) saturate(120%); box-shadow: 0 8px 30px #0002; }
+.focus-mode .site-header .header-note { display: none; }
+.focus-mode .radio-device { display: block; position: fixed; inset: 0; width: 100%; height: 100dvh; min-height: 0; overflow: hidden; padding: 0; border: 0; border-radius: 0; background: #080d17; backdrop-filter: none; box-shadow: none; }
+.focus-mode .radio-device::before { display: block; z-index: 1; inset: 0; border: 0; border-radius: 0; background: linear-gradient(180deg,#05091666,transparent 24%,transparent 64%,#050a1566); pointer-events: none; }
+.focus-mode .radio-screen { position: absolute; inset: 0; height: 100%; min-height: 0; padding: 94px 32px 222px; border: 0; border-radius: 0; box-shadow: none; }
+.focus-mode .radio-screen::after { border-radius: 0; box-shadow: inset 0 0 80px #05081135; background: none; }
+.focus-mode .hero-topline { position: relative; z-index: 2; }
+.focus-mode .scene-caption { min-height: 34px; font-size: 11px; background: #0913238c; }
+.focus-mode .scene-tools .exit-focus-button { display: none; }
+.focus-mode .screen-signature { position: relative; z-index: 2; color: #f1edff70; }
+.focus-mode .player-bar { position: absolute; z-index: 3; bottom: max(24px,env(safe-area-inset-bottom)); inset-inline: 0; transform: none; display: grid; width: min(1120px,calc(100% - 64px)); margin: 0 auto; padding: 18px 20px; grid-template-columns: minmax(230px,1.25fr) minmax(190px,1fr) 164px 88px; align-items: center; gap: 22px; border: 1px solid #e5edff2b; border-radius: 19px; background: linear-gradient(120deg,#233246bc,#111c2abf 60%,#283145bc); backdrop-filter: blur(26px) saturate(120%); box-shadow: inset 0 1px #ffffff16,0 16px 55px #03061066; }
+.focus-mode.controls-idle .player-bar { opacity: 1; pointer-events: auto; }
+.focus-mode.controls-idle .scene-tools { opacity: 1; }
+.focus-mode .chassis-screw, .focus-mode .chassis-signature { display: none; }
+.focus-mode .radio-screen .tuning-status { bottom: 195px; inset-inline: auto; inset-inline-start: 32px; max-width: calc(100% - 64px); }
+
+/* Lo-fi returns the scene to a simple, soft player with a visible volume slider. */
+body[data-listening-mode='lofi'] .radio-device { padding: 0; overflow: hidden; border-color: #d5c6ef2b; background: #111722; }
+body[data-listening-mode='lofi'] .radio-device::before,
+body[data-listening-mode='lofi'] .chassis-screw,
+body[data-listening-mode='lofi'] .chassis-signature,
+body[data-listening-mode='lofi'] .frequency-dial,
+body[data-listening-mode='lofi'] .frequency-readout,
+body[data-listening-mode='lofi'] .meter-module,
+body[data-listening-mode='lofi'] .receiver-state,
+body[data-listening-mode='lofi'] .receiver-stereo,
+body[data-listening-mode='lofi'] .screen-signature { display: none; }
+body[data-listening-mode='lofi'] .radio-screen { height: clamp(380px,52vh,650px); padding: 22px 24px 26px; border: 0; border-radius: 0; }
+body[data-listening-mode='lofi'] .radio-screen::before { display: none; }
+body[data-listening-mode='lofi'] .radio-screen::after { box-shadow: none; background: none; }
+body[data-listening-mode='lofi'] .hero-scrim { background: linear-gradient(180deg,#070b184d,transparent 35%,#090d1955); }
+body[data-listening-mode='lofi'] .player-bar { margin: 0; padding: 20px 26px; grid-template-columns: minmax(0,1fr) 164px 155px; gap: 30px; border: 0; border-top: 1px solid #e4d7ff20; border-radius: 0; background: linear-gradient(120deg,#1d2437b0,#171f31c2); backdrop-filter: blur(24px); }
+body[data-listening-mode='lofi'] .receiver-lcd { height: auto; min-height: 0; padding: 0; overflow: visible; border: 0; border-radius: 0; background: none; box-shadow: none; }
+body[data-listening-mode='lofi'] .receiver-lcd::after { display: none; }
+body[data-listening-mode='lofi'] .receiver-state { margin-bottom: 6px; }
+body[data-listening-mode='lofi'] .station-label { font-size: 9px; color: #c5c2d6; letter-spacing: 1.2px; }
+body[data-listening-mode='lofi'] .station-info h2 { font-size: 22px; color: #f7f0ff; font-weight: 600; letter-spacing: -.6px; }
+body[data-listening-mode='lofi'] .station-info p { color: #bec2d4; font-size: 11px; margin-top: 6px; }
+body[data-listening-mode='lofi'] .playback-controls .icon-button,
+body[data-listening-mode='lofi'] .player-extras .icon-button { border-color: transparent; border-radius: 50%; background: none; box-shadow: none; }
+body[data-listening-mode='lofi'] .playback-controls .icon-button:hover,
+body[data-listening-mode='lofi'] .player-extras .icon-button:hover { border-color: #f0dfff20; background: #e8dbff12; }
+body[data-listening-mode='lofi'] .play-button { border: 0; border-radius: 50%; width: 48px; height: 48px; background: #ddc8f7; box-shadow: 0 4px 20px #11112540; }
+body[data-listening-mode='lofi'] .transport-module { gap: 5px; }
+body[data-listening-mode='lofi'] .player-extras .icon-button { height: 38px; }
+body[data-listening-mode='lofi'] .dial-module { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 9px 10px; align-items: center; }
+body[data-listening-mode='lofi'] .dial-label { grid-column: 1; grid-row: 1; color: #bcc4d8; font-size: 9px; }
+body[data-listening-mode='lofi'] .dial-module output { grid-column: 2; grid-row: 1; color: #d6c8ed; }
+body[data-listening-mode='lofi'] .dial-control { grid-column: 1/-1; grid-row: 2; width: 100%; height: 32px; margin: 0; border: 0; border-radius: 0; background: none; box-shadow: none; }
+body[data-listening-mode='lofi'] .dial-control::after,
+body[data-listening-mode='lofi'] .dial-indicator { display: none; }
+body[data-listening-mode='lofi'] #volumeDial { position: relative; inset: auto; width: 100%; height: 32px !important; opacity: 1; accent-color: #d5bceb; cursor: pointer; }
+body[data-listening-mode='lofi'] .dial-control:focus-within { outline: none; }
+body[data-listening-mode='lofi'] #volumeDial:focus-visible { outline: 2px solid var(--accent-color); outline-offset: 2px; border-radius: 6px; }
+body[data-listening-mode='lofi'].focus-mode .radio-device { padding: 0; border: 0; }
+body[data-listening-mode='lofi'].focus-mode .radio-screen { height: 100%; padding: 94px 32px 180px; }
+body[data-listening-mode='lofi'].focus-mode .player-bar { bottom: max(24px,env(safe-area-inset-bottom)); width: min(940px,calc(100% - 64px)); margin: 0 auto; padding: 19px 24px; border: 1px solid #e5d5ff2b; border-radius: 19px; background: linear-gradient(125deg,#202b3bbb,#141e31bf); box-shadow: 0 16px 55px #03061066; }
+body[data-listening-mode='lofi'].focus-mode .radio-screen .tuning-status { bottom: 157px; }
+
+/* LCD and meter share one persisted display colour. */
+.display-color-picker { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 8px; margin: 15px 0; }
+.display-color-picker button { --swatch-rgb: 128, 239, 176; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px; min-width: 0; min-height: 69px; padding: 10px 3px; border: 1px solid #cad8f326; border-radius: 10px; background: #0c14208c; color: #c4cbdb; font-size: 11px; }
+.display-color-picker .color-dot { width: 19px; height: 19px; flex-shrink: 0; border: 2px solid #ffffff26; border-radius: 50%; background: rgb(var(--swatch-rgb)); box-shadow: 0 0 12px rgba(var(--swatch-rgb),.18); }
+.display-color-picker button[data-display-color='ice'] { --swatch-rgb: 128, 220, 255; }
+.display-color-picker button[data-display-color='amber'] { --swatch-rgb: 255, 191, 103; }
+.display-color-picker button[data-display-color='violet'] { --swatch-rgb: 192, 143, 255; }
+.display-color-picker button[data-display-color='rose'] { --swatch-rgb: 255, 151, 187; }
+.display-color-picker button:hover { background: #d9e3ff0b; }
+.display-color-picker button[aria-pressed='true'] { color: #f4f6ff; border-color: rgba(var(--swatch-rgb),.75); background: rgba(var(--swatch-rgb),.09); }
+.appearance-settings .listening-mode-switch { display: flex; width: 100%; margin: 13px 0 22px; }
+.appearance-settings .listening-mode-switch button { flex: 1; min-height: 42px; font-size: 13px; }
+.appearance-settings h4 { margin: 20px 0 6px; font-size: 12px; font-weight: 600; }
+.appearance-help { margin: 7px 0 14px; color: #b1bdd0; font-size: 12px; line-height: 1.65; }
+.language-setting { display: flex; justify-content: space-between; align-items: center; gap: 18px; padding: 17px 0; border-block-start: 1px solid #dde6fb1b; }
+.language-setting strong { font-size: 12px; }
+.language-setting p { margin-top: 4px; color: #aebbd1; font-size: 11px; line-height: 1.6; }
+
+@media (max-width: 1200px) {
+  .header-note { display: none; }
+  .header-room { width: 44px; padding: 0; }
+  .header-room span { display: none; }
+  .player-bar, .focus-mode .player-bar { grid-template-columns: minmax(180px,1.15fr) minmax(160px,.85fr) 164px 78px; gap: 16px; }
+  .dial-control { width: 65px; height: 65px; }
+}
+@media (max-width: 880px) {
+  .site-header { gap: 12px; }
+  .brand-lockup { gap: 8px; }
+  .listening-mode-switch button { padding: 0 11px; font-size: 11px; }
+  .header-browse-button { width: 44px; padding: 0; }
+  .header-browse-button span { display: none; }
+  .header-actions { gap: 4px; }
+  .radio-device { padding: 12px; }
+  .player-bar, .focus-mode .player-bar { grid-template-columns: minmax(0,1.15fr) minmax(0,.85fr) 150px 68px; gap: 12px; padding: 15px 14px; }
+  .playback-controls, .player-extras { grid-template-columns: repeat(3,44px); gap: 6px; }
+  .playback-controls .icon-button, .play-button, .player-extras .icon-button { width: 44px; height: 44px; }
+  .receiver-lcd { padding: 11px; }
+  .frequency-readout > #freqValue { font-size: 35px; }
+  .meter-module { padding: 10px; }
+  .retro-meter { gap: 3px; }
+  .dial-control { width: 61px; height: 61px; }
+  .focus-mode .site-header { width: calc(100% - 40px); }
+  .focus-mode .player-bar { width: calc(100% - 40px); }
+  body[data-listening-mode='lofi'] .player-bar { grid-template-columns: minmax(0,1fr) 150px 125px; padding: 18px 20px; gap: 22px; }
+  body[data-listening-mode='lofi'].focus-mode .player-bar { width: calc(100% - 40px); }
+  body[data-listening-mode='lofi'] .play-button { width: 44px; height: 44px; }
+}
+@media (max-width: 680px) {
+  .site-header, .focus-mode .site-header { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 10px 12px; height: auto; min-height: 104px; padding: 11px 0 14px; }
+  .site-header .brand-lockup { grid-column: 1; grid-row: 1; }
+  .site-header .header-actions { grid-column: 2; grid-row: 1; }
+  .site-header .listening-mode-switch { grid-column: 1/-1; grid-row: 2; justify-self: center; }
+  .header-actions > [data-panel-target='playlistPanel'], .header-room, .header-focus-button { display: none; }
+  .header-actions .icon-button, .header-room, .header-browse-button { width: 40px; min-height: 40px; height: 40px; padding: 0; border-color: #d9e4fa1a; border-radius: 10px; background: #111b2b5c; }
+  .header-actions .language-toggle { min-width: 40px; min-height: 40px; height: 40px; padding: 0 6px; }
+  .listening-mode-switch { padding: 3px; border-radius: 11px; }
+  .listening-mode-switch button { min-height: 34px; padding: 0 18px; font-size: 12px; }
+  .brand-lockup { gap: 7px; }
+  .focus-mode .site-header { top: max(10px,env(safe-area-inset-top)); width: calc(100% - 24px); min-height: 102px; padding: 8px 10px; gap: 7px 8px; border-radius: 15px; }
+  .radio-device { padding: 10px; border-radius: 17px; }
+  .radio-screen { height: clamp(270px,42vh,430px); padding: 12px; border-radius: 10px; }
+  .player-bar, .focus-mode .player-bar { grid-template-columns: minmax(0,1fr) 124px; gap: 13px 14px; padding: 14px; align-items: center; }
+  .station-info, .focus-mode .station-info { grid-column: 1; grid-row: 1; }
+  .meter-module, .focus-mode .meter-module { grid-column: 2; grid-row: 1; }
+  .receiver-lcd, .focus-mode .receiver-lcd, .meter-module, .focus-mode .meter-module { min-height: 103px; height: 103px; padding: 10px; }
+  .receiver-stereo { display: none; }
+  .station-label { font-size: 8px; letter-spacing: .65px; }
+  .receiver-state { gap: 5px; }
+  .frequency-readout { margin: 5px 0 3px; }
+  .frequency-readout > #freqValue { font-size: 36px; }
+  .frequency-readout small { font-size: 9px; }
+  .band-label { font-size: 16px; }
+  .station-info h2 { font-size: 13px; }
+  .station-info p { font-size: 9px; }
+  .frequency-dial { display: none; }
+  .retro-meter, .focus-mode .retro-meter { height: 64px; margin: 8px 0 0; gap: 3px; }
+  .meter-column { gap: 2px; }
+  .meter-segment { max-height: 4px; }
+  .meter-caption { font-size: 7px; letter-spacing: .65px; }
+  .meter-stereo { display: none; }
+  .meter-axis { display: none; }
+  .transport-module, .focus-mode .transport-module { grid-column: 1; grid-row: 2; display: grid; justify-content: start; gap: 7px; }
+  .dial-module, .focus-mode .dial-module { grid-column: 2; grid-row: 2; gap: 6px; }
+  .dial-control, .focus-mode .dial-control { width: 63px; height: 63px; }
+  .player-bar { margin-top: 10px; border-radius: 12px; }
+  .chassis-signature { font-size: 6px; letter-spacing: 1px; }
+  .focus-mode .radio-screen { padding: 127px 16px 266px; }
+  .focus-mode .player-bar { width: calc(100% - 24px); bottom: max(12px,env(safe-area-inset-bottom)); border-radius: 17px; }
+  .focus-mode .scene-caption { max-width: calc(100% - 48px); min-height: 34px; font-size: 10px; padding: 0 9px; }
+  .focus-mode .scene-caption-rule, .focus-mode .hero-time { display: none; }
+  .focus-mode .screen-signature { font-size: 10px; }
+  .focus-mode .radio-screen .tuning-status { inset-inline-start: 16px; bottom: 256px; max-width: calc(100% - 32px); font-size: 10px; }
+  body[data-listening-mode='lofi'] .radio-screen { height: clamp(320px,48vh,530px); padding: 15px; }
+  body[data-listening-mode='lofi'] .player-bar { grid-template-columns: minmax(0,1fr) 124px; gap: 15px 14px; padding: 18px; }
+  body[data-listening-mode='lofi'] .station-info { grid-column: 1/-1; grid-row: 1; }
+  body[data-listening-mode='lofi'] .receiver-lcd { height: auto; min-height: 0; padding: 0; }
+  body[data-listening-mode='lofi'] .station-info h2 { font-size: 21px; }
+  body[data-listening-mode='lofi'] .station-info p { font-size: 10px; }
+  body[data-listening-mode='lofi'] .transport-module { grid-column: 1; grid-row: 2; gap: 4px; }
+  body[data-listening-mode='lofi'] .dial-module { grid-column: 2; grid-row: 2; gap: 8px; }
+  body[data-listening-mode='lofi'] .dial-control { width: 100%; height: 32px; }
+  body[data-listening-mode='lofi'].focus-mode .radio-screen { padding: 127px 16px 230px; }
+  body[data-listening-mode='lofi'].focus-mode .player-bar { bottom: max(12px,env(safe-area-inset-bottom)); width: calc(100% - 24px); padding: 17px 18px; }
+  body[data-listening-mode='lofi'].focus-mode .radio-screen .tuning-status { bottom: 212px; }
+}
+@media (max-width: 360px) {
+  .header-actions { gap: 2px; }
+  .header-actions .icon-button, .header-room, .header-browse-button { width: 36px; }
+  .header-actions .language-toggle { min-width: 36px; width: 36px; padding: 0 3px; font-size: 11px; }
+  .brand-lockup { gap: 5px; }
+  .player-bar, .focus-mode .player-bar { grid-template-columns: minmax(0,1fr) 100px; gap: 12px; padding: 12px; }
+  .receiver-lcd, .focus-mode .receiver-lcd, .meter-module, .focus-mode .meter-module { padding: 8px; min-height: 99px; height: 99px; }
+  .frequency-readout > #freqValue { font-size: 33px; }
+  .frequency-readout { gap: 4px; }
+  .band-label { font-size: 14px; }
+  .station-info h2 { font-size: 12px; }
+  .station-label { font-size: 7px; }
+  .receiver-light { width: 4px; height: 4px; }
+  .retro-meter, .focus-mode .retro-meter { gap: 2px; }
+  .meter-caption { font-size: 6px; }
+  .playback-controls, .player-extras { gap: 5px; }
+  .transport-module, .focus-mode .transport-module { gap: 6px; }
+  .dial-control, .focus-mode .dial-control { width: 59px; height: 59px; }
+  body[data-listening-mode='lofi'] .player-bar { grid-template-columns: minmax(0,1fr) 100px; padding: 16px 12px; gap: 13px 12px; }
+  body[data-listening-mode='lofi'].focus-mode .player-bar { padding: 16px 12px; }
+  body[data-listening-mode='lofi'] .dial-control { width: 100%; height: 32px; }
+  .display-color-picker { gap: 6px; }
+  .display-color-picker button { font-size: 10px; }
+}
+/* Short landscapes keep the picture visible while preserving 44px targets. */
+@media (max-height: 540px) and (min-width: 560px) {
+  .focus-mode .site-header { display: flex; width: calc(100% - 28px); top: max(8px,env(safe-area-inset-top)); height: 52px; min-height: 52px; padding: 0 10px; gap: 12px; }
+  .focus-mode .listening-mode-switch button { min-height: 32px; padding: 0 10px; font-size: 11px; }
+  .focus-mode .header-actions > [data-panel-target='playlistPanel'] { display: none; }
+  .focus-mode .header-actions .icon-button, .focus-mode .header-room, .focus-mode .header-browse-button { width: 38px; min-height: 38px; height: 38px; }
+  .focus-mode .radio-screen { padding: 72px 16px 139px; }
+  .focus-mode .player-bar { bottom: max(10px,env(safe-area-inset-bottom)); width: calc(100% - 28px); padding: 12px; grid-template-columns: minmax(0,1.2fr) minmax(0,.8fr) 150px 64px; gap: 12px; }
+  .focus-mode .station-info { grid-column: 1; grid-row: 1; }
+  .focus-mode .meter-module { grid-column: 2; grid-row: 1; }
+  .focus-mode .transport-module { grid-column: 3; grid-row: 1; gap: 5px; }
+  .focus-mode .dial-module { grid-column: 4; grid-row: 1; gap: 5px; }
+  .focus-mode .receiver-lcd, .focus-mode .meter-module { height: 96px; min-height: 96px; padding: 8px; }
+  .focus-mode .retro-meter { height: 59px; margin: 7px 0 0; }
+  .focus-mode .meter-axis, .focus-mode .frequency-dial { display: none; }
+  .focus-mode .frequency-readout > #freqValue { font-size: 32px; }
+  .focus-mode .station-info h2 { font-size: 12px; }
+  .focus-mode .station-info p { font-size: 9px; }
+  .focus-mode .station-label, .focus-mode .meter-caption { font-size: 7px; }
+  .focus-mode .dial-control { width: 55px; height: 55px; }
+  .focus-mode .radio-screen .tuning-status { bottom: 137px; }
+  body[data-listening-mode='lofi'].focus-mode .radio-screen { padding: 72px 16px 121px; }
+  body[data-listening-mode='lofi'].focus-mode .player-bar { bottom: max(10px,env(safe-area-inset-bottom)); width: calc(100% - 28px); padding: 12px 18px; grid-template-columns: minmax(0,1fr) 150px 116px; gap: 18px; }
+  body[data-listening-mode='lofi'].focus-mode .station-info { grid-column: 1; grid-row: 1; }
+  body[data-listening-mode='lofi'].focus-mode .transport-module { grid-column: 2; grid-row: 1; }
+  body[data-listening-mode='lofi'].focus-mode .dial-module { grid-column: 3; grid-row: 1; }
+  body[data-listening-mode='lofi'].focus-mode .receiver-lcd { height: auto; min-height: 0; padding: 0; }
+  body[data-listening-mode='lofi'].focus-mode .station-info h2 { font-size: 20px; }
+  body[data-listening-mode='lofi'].focus-mode .dial-control { width: 100%; height: 32px; }
+  body[data-listening-mode='lofi'].focus-mode .radio-screen .tuning-status { bottom: 117px; }
+}
+@media (max-height: 450px) and (min-width: 560px) and (max-width: 700px) {
+  .focus-mode .meter-module { display: none; }
+  .focus-mode .player-bar { grid-template-columns: minmax(0,1fr) 150px 64px; }
+  .focus-mode .transport-module { grid-column: 2; }
+  .focus-mode .dial-module { grid-column: 3; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .radio-device, .player-bar, .focus-mode .player-bar, .focus-mode .site-header { background: #172130; backdrop-filter: none; }
+  body[data-listening-mode='lofi'] .player-bar { background: #192335; }
+}
+@media (prefers-contrast: more) {
+  .radio-device, .player-bar, .focus-mode .player-bar, .focus-mode .site-header, .listening-mode-switch { border-color: #8d9bb4; background-color: #101a29; }
+  .receiver-lcd, .meter-module { border-color: var(--display-muted); background: #06101d; }
+  .station-label, .receiver-stereo, .meter-caption, .meter-axis { color: var(--display-ink); }
+  .playback-controls .icon-button, .player-extras .icon-button { border-color: #a8b6cf; }
+  .display-color-picker button { border-color: #8d9bb4; }
+}

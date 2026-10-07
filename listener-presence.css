@@ -1,0 +1,18 @@
+.station-listeners {
+    display: inline-flex;
+    align-items: center;
+    gap: .35em;
+    margin-inline-start: .75em;
+    color: var(--accent-color, #82e8d5);
+    font-size: .92em;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    vertical-align: baseline;
+}
+.station-listeners i {
+    font-size: .95em;
+    opacity: .85;
+    filter: drop-shadow(0 0 4px currentColor);
+}
+.station-listeners.listeners-unavailable { color: var(--text-muted, #9fa6b9); }
+.station-listeners.listeners-unavailable i { filter: none; opacity: .6; }

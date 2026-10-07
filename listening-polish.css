@@ -1,0 +1,145 @@
+/* Readable details with room for the real dock and footer measurements. */
+body[data-listening-mode="neon"] #neonStationName { padding-inline: .18em; box-sizing: border-box; }
+body.radio-spatial-ready #neonSignalBadge { border: 0; background: transparent; box-shadow: none; backdrop-filter: none; padding-inline: 0; }
+body .radio-side-picker[hidden] { display: none; }
+body[data-listening-mode="neon"] .player-bar,
+body[data-listening-mode="neon"].focus-mode .player-bar {
+  border-color: #b4a3e14d; border-radius: 22px;
+  background: linear-gradient(115deg, #231b3bdf, #0c1223eb 48%, #291930df);
+  box-shadow: inset 0 1px #e7d9ff28, inset 0 -1px #4dd9ed24, 0 14px 44px #03071480, 0 0 32px #9472cc14;
+}
+body[data-listening-mode="neon"] .player-bar::after { content: ""; pointer-events: none; position: absolute; inset: auto 24px 0; height: 1px; background: linear-gradient(90deg, transparent, #78e3ed77, #dd9ed36e, transparent); }
+body[data-listening-mode="neon"] .player-bar .receiver-lcd { border-inline-start: 1px solid #9a90c93b; padding-inline-start: 14px; }
+body[data-listening-mode="neon"] .player-bar .receiver-state { margin-bottom: 6px; }
+body[data-listening-mode="neon"] .player-bar .receiver-light { opacity: .35; }
+body[data-listening-mode="neon"]:has(.radio-device.playing) .player-bar .receiver-light { opacity: 1; box-shadow: 0 0 8px #fa78c8; }
+body[data-listening-mode="neon"] .player-bar .station-label { color: #e99bd0; font-size: 10px; }
+body[data-listening-mode="neon"] .player-bar .station-info h2 { font-size: 17px; line-height: 1.45; }
+body[data-listening-mode="neon"] .player-bar .station-info p { color: #8bd4e1; font-size: 11px; }
+body[data-listening-mode="neon"] .player-bar .playback-controls > .icon-button { border-color: #c0aedb38; background: linear-gradient(150deg, #4b365335, #171a303d); box-shadow: inset 0 1px #ffffff12; transition: background .2s, border-color .2s, transform .2s; }
+body[data-listening-mode="neon"] .player-bar .playback-controls > .icon-button:hover { border-color: #d9b5e88c; background: #59406559; transform: translateY(-2px); }
+body[data-listening-mode="neon"] .player-bar .play-button { border-color: #ffc29b8c; box-shadow: inset 0 1px #ffe6ce5c, 0 0 0 5px #ff766813, 0 0 30px #ff5a6959; }
+body[data-listening-mode="neon"] .player-bar .dial-label,
+body[data-listening-mode="neon"] .player-bar #dialValue { font-size: 11px; }
+@media (min-width: 1081px) and (min-height: 541px) {
+  body.radio-spatial-ready[data-listening-mode="neon"] .neon-center { container-type: inline-size; }
+  body.radio-spatial-ready[data-listening-mode="neon"] #neonStationName { width: 100%; font-size: clamp(40px, 10.5cqw, 94px); }
+}
+body[data-listening-mode="neon"] .renner-cassette {
+  flex-basis: 108px; width: 108px; height: 70px; border-radius: 8px;
+  border-color: rgba(var(--display-rgb), .48);
+  background: linear-gradient(145deg, #474258d9, #1d1930f2 48%, #22203cf2);
+  box-shadow: inset 0 1px #ffffff30, inset 0 -3px #03030b99, 0 0 22px var(--cassette-glow);
+}
+body[data-listening-mode="neon"] .renner-cassette::before { inset: 7% 6% 24%; border-radius: 5px; }
+body[data-listening-mode="neon"] .renner-cassette::after { bottom: 9%; height: 3px; opacity: .85; }
+body[data-listening-mode="neon"] .cassette-label { top: 13%; left: 15%; font-size: 8px; letter-spacing: 1.7px; color: #eee8ff; opacity: .92; }
+body[data-listening-mode="neon"] .cassette-side { top: 13%; right: 12%; font-size: 9px; opacity: .9; }
+body[data-listening-mode="neon"] .cassette-window { top: 36%; left: 12%; right: 12%; height: 34%; padding: 0 6%; border-radius: 12px; border-color: #b8a7da38; }
+body[data-listening-mode="neon"] .cassette-reel { width: 21%; height: auto; aspect-ratio: 1; border-width: 2px; }
+body[data-listening-mode="neon"] .cassette-tape { left: 18%; right: 18%; top: 47%; height: 2px; }
+body[data-listening-mode="neon"] .cassette-mouth { display: block; left: 29%; right: 29%; bottom: 15%; height: 9%; }
+body[data-listening-mode="neon"] .cassette-screw { width: 3px; height: 3px; }
+body[data-listening-mode="neon"] .cassette-screw-0 { top: 6%; left: 4%; }
+body[data-listening-mode="neon"] .cassette-screw-1 { top: 6%; right: 4%; }
+body[data-listening-mode="neon"] .cassette-screw-2 { bottom: 6%; left: 4%; }
+body[data-listening-mode="neon"] .cassette-screw-3 { bottom: 6%; right: 4%; }
+
+/* A curved silhouette and soft base light connect the activity display to the dock. */
+body[data-listening-mode="neon"] .player-bar .meter-module,
+body[data-listening-mode="neon"].focus-mode .player-bar .meter-module {
+  width: clamp(250px, 22vw, 340px); height: 70px; min-height: 70px;
+  padding: 8px 15px 3px; bottom: 100%; border-radius: 50% 50% 0 0;
+  border-bottom: 1px solid rgba(var(--display-rgb), .55);
+  background: radial-gradient(ellipse at bottom, rgba(var(--display-rgb), .11), transparent 70%);
+  box-shadow: 0 7px 16px -10px rgba(var(--display-rgb), .7);
+}
+body[data-listening-mode="neon"] .player-bar .retro-meter,
+body[data-listening-mode="neon"].focus-mode .player-bar .retro-meter { height: 58px; gap: 6px; }
+body[data-listening-mode="neon"] .player-bar .meter-column { transform: scaleY(var(--meter-contour, 1)); transform-origin: bottom; gap: 2px; }
+body[data-listening-mode="neon"] .player-bar .meter-column:nth-child(1),
+body[data-listening-mode="neon"] .player-bar .meter-column:nth-child(12) { --meter-contour: .45; }
+body[data-listening-mode="neon"] .player-bar .meter-column:nth-child(2),
+body[data-listening-mode="neon"] .player-bar .meter-column:nth-child(11) { --meter-contour: .64; }
+body[data-listening-mode="neon"] .player-bar .meter-column:nth-child(3),
+body[data-listening-mode="neon"] .player-bar .meter-column:nth-child(10) { --meter-contour: .82; }
+body[data-listening-mode="neon"] .player-bar .meter-column:nth-child(4),
+body[data-listening-mode="neon"] .player-bar .meter-column:nth-child(9) { --meter-contour: .94; }
+body[data-listening-mode="neon"] .player-bar .meter-segment { max-height: 4px; border-radius: 3px; background: rgba(var(--display-rgb), .10); }
+body[data-listening-mode="neon"] .player-bar .meter-segment.is-lit { box-shadow: 0 0 9px rgba(var(--display-rgb), .4); }
+
+.content-footer.has-renner-quote,
+body.quote-experience-on.focus-mode .content-footer.has-renner-quote,
+body.quote-experience-on[data-listening-mode="neon"] .content-footer.has-renner-quote {
+  display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
+  gap: 5px; font-size: 16px; line-height: 1.55; text-align: left;
+  z-index: 70; isolation: isolate;
+}
+.content-footer.has-renner-quote { position: relative; }
+body.quote-experience-on.focus-mode .content-footer.has-renner-quote,
+body.quote-experience-on[data-listening-mode="neon"] .content-footer.has-renner-quote { position: fixed; }
+.content-footer.has-renner-quote::before { content: ""; position: absolute; z-index: -1; inset: -10px 0; background: linear-gradient(0deg, #07091df5, #07091dca 75%, transparent); pointer-events: none; }
+html[dir="rtl"] body .content-footer.has-renner-quote,
+html[dir="rtl"] body.quote-experience-on.focus-mode .content-footer.has-renner-quote,
+html[dir="rtl"] body.quote-experience-on[data-listening-mode="neon"] .content-footer.has-renner-quote { align-items: flex-end; }
+.renner-quote-slot { align-self: flex-start; width: fit-content; justify-content: flex-start; align-items: baseline; max-width: min(1080px, 100%); column-gap: 10px; row-gap: 2px; text-wrap: pretty; }
+html[dir="rtl"] body .renner-quote-slot { align-self: flex-end; }
+.renner-quote-text { color: #f1edff; font-weight: 500; text-shadow: 0 1px 7px #040311, 0 0 18px #a892e626; }
+.renner-quote-slot[dir="rtl"] .renner-quote-text { line-height: 1.8; }
+.renner-quote-credit { color: #c4bcdd; font-size: 12px; white-space: nowrap; }
+.renner-quote-text.is-typing::after { width: 2px; border-radius: 2px; box-shadow: 0 0 7px rgba(var(--display-rgb), .55); }
+.creator-credit { display: flex; align-items: center; justify-content: flex-start; flex-wrap: wrap; gap: 6px; font-size: 12px; line-height: 1.6; color: #bdb4d2; }
+.creator-heart { color: #fa7fa9; font-size: 10px; filter: drop-shadow(0 0 4px #f379ab50); }
+.creator-github, .creator-coffee { pointer-events: auto; display: inline-flex; align-items: center; gap: 6px; min-height: 28px; padding: 2px 3px; border: 0; background: transparent; color: #e5dcf5; text-decoration: none; font-size: inherit; font-family: inherit; line-height: inherit; transition: color .2s, transform .2s; }
+.creator-github i { font-size: 17px; }
+.creator-github:hover, a.creator-coffee:hover { color: var(--display-bright); transform: translateY(-1px); }
+.creator-divider { margin-inline: 4px; color: #807a93; }
+.creator-coffee:disabled { opacity: 1; color: #afa4bf; cursor: default; }
+.creator-coffee i { color: #d9b98e; font-size: 13px; }
+.creator-github:focus-visible, .creator-coffee:focus-visible { outline: 2px solid var(--display-ink); outline-offset: 3px; border-radius: 4px; }
+.content-footer .community-status { font-size: 11px; }
+
+@media (max-width: 1080px) {
+  body[data-listening-mode="neon"] .renner-cassette { flex-basis: 94px; width: 94px; height: 62px; }
+  body[data-listening-mode="neon"] .player-bar .meter-module,
+  body[data-listening-mode="neon"].focus-mode .player-bar .meter-module { width: 260px; height: 58px; min-height: 58px; padding: 5px 12px 2px; }
+  body[data-listening-mode="neon"] .player-bar .retro-meter,
+  body[data-listening-mode="neon"].focus-mode .player-bar .retro-meter { height: 50px; gap: 5px; }
+}
+@media (max-width: 700px) {
+  body[data-listening-mode="neon"] .renner-cassette { flex-basis: 78px; width: 78px; height: 52px; }
+  body[data-listening-mode="neon"] .cassette-label { font-size: 6px; letter-spacing: 1px; }
+  body[data-listening-mode="neon"] .cassette-side { font-size: 7px; }
+  body[data-listening-mode="neon"] .player-bar .station-info { grid-column: 1 / -1; gap: 12px; }
+  body[data-listening-mode="neon"] .player-bar .receiver-lcd { padding-inline-start: 10px; }
+  body[data-listening-mode="neon"] .player-bar .station-info h2 { font-size: 14px; }
+  body[data-listening-mode="neon"] .player-bar .station-info p,
+  body[data-listening-mode="neon"] .player-bar .station-label { font-size: 10px; }
+  body[data-listening-mode="neon"] .player-bar .transport-module { grid-column: 2; grid-row: 2; }
+  body[data-listening-mode="neon"] .player-bar .dial-module { grid-column: 1; grid-row: 2; }
+  body[data-listening-mode="neon"] .player-bar .meter-module,
+  body[data-listening-mode="neon"].focus-mode .player-bar .meter-module { width: 220px; height: 46px; min-height: 46px; padding: 3px 10px 1px; }
+  body[data-listening-mode="neon"] .player-bar .retro-meter,
+  body[data-listening-mode="neon"].focus-mode .player-bar .retro-meter { height: 41px; gap: 4px; }
+  body[data-listening-mode="neon"] .player-bar .meter-column { gap: 1px; }
+  .content-footer.has-renner-quote,
+  body.quote-experience-on.focus-mode .content-footer.has-renner-quote,
+  body.quote-experience-on[data-listening-mode="neon"] .content-footer.has-renner-quote { font-size: 14px; line-height: 1.5; gap: 3px; }
+  .renner-quote-credit { font-size: 11px; }
+  .renner-quote-slot { flex-direction: column; align-items: center; gap: 1px; width: 100%; }
+  .renner-quote-line { width: 100%; }
+  .creator-credit { gap: 4px; font-size: 11px; }
+}
+@media (max-height: 540px) and (min-width: 560px) {
+  .content-footer.has-renner-quote,
+  body.quote-experience-on.focus-mode .content-footer.has-renner-quote,
+  body.quote-experience-on[data-listening-mode="neon"] .content-footer.has-renner-quote { font-size: 12px; gap: 1px; }
+  .creator-credit, .renner-quote-credit { font-size: 10px; }
+  .creator-github, .creator-coffee { min-height: 22px; }
+  body[data-listening-mode="neon"] .renner-cassette { flex-basis: 74px; width: 74px; height: 49px; }
+  body[data-listening-mode="neon"] .cassette-label { font-size: 5px; letter-spacing: 1px; }
+  body[data-listening-mode="neon"] .cassette-side { font-size: 6px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .creator-github, .creator-coffee, body[data-listening-mode="neon"] .player-bar .playback-controls > .icon-button { transition: none; }
+}

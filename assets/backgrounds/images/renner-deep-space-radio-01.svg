@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Renner Deep Space Radio</title>
+  <desc id="desc">A cosmic radio station scene with stars and violet glow.</desc>
+  <defs>
+    <radialGradient id="space" cx="48%" cy="42%" r="72%">
+      <stop offset="0" stop-color="#25105a"/>
+      <stop offset="0.42" stop-color="#090b24"/>
+      <stop offset="1" stop-color="#02030a"/>
+    </radialGradient>
+    <radialGradient id="nebula" cx="62%" cy="32%" r="42%">
+      <stop offset="0" stop-color="#a970ff" stop-opacity="0.52"/>
+      <stop offset="0.44" stop-color="#28e9ff" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow" x="-45%" y="-45%" width="190%" height="190%">
+      <feGaussianBlur stdDeviation="9" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1600" height="900" fill="url(#space)"/>
+  <rect width="1600" height="900" fill="url(#nebula)"/>
+  <g fill="#fff" opacity="0.6">
+    <circle cx="110" cy="92" r="2"/>
+    <circle cx="266" cy="154" r="1.7"/>
+    <circle cx="425" cy="74" r="1.5"/>
+    <circle cx="636" cy="128" r="2.4"/>
+    <circle cx="816" cy="64" r="1.8"/>
+    <circle cx="1088" cy="118" r="2"/>
+    <circle cx="1302" cy="78" r="1.6"/>
+    <circle cx="1490" cy="170" r="2.2"/>
+    <circle cx="198" cy="344" r="1.4"/>
+    <circle cx="520" cy="292" r="2"/>
+    <circle cx="942" cy="304" r="1.5"/>
+    <circle cx="1220" cy="342" r="2.2"/>
+    <circle cx="1434" cy="424" r="1.5"/>
+  </g>
+  <g opacity="0.28" stroke="#6bf7ff" stroke-width="2">
+    <ellipse cx="800" cy="458" rx="470" ry="126" fill="none"/>
+    <ellipse cx="800" cy="458" rx="330" ry="86" fill="none"/>
+  </g>
+  <g filter="url(#glow)">
+    <circle cx="800" cy="458" r="116" fill="#111431" stroke="#76f6ff" stroke-width="5"/>
+    <circle cx="800" cy="458" r="72" fill="#080a17" stroke="#ff4fd8" stroke-width="4"/>
+    <path d="M742 458 C766 418 836 418 860 458 C836 498 766 498 742 458 Z" fill="#50f2ff" opacity="0.86"/>
+    <path d="M644 548 L956 548" stroke="#ffd166" stroke-width="8" stroke-linecap="round"/>
+    <path d="M692 584 L908 584" stroke="#ff4fd8" stroke-width="6" stroke-linecap="round"/>
+  </g>
+  <g opacity="0.5">
+    <path d="M0 720 C260 660 468 710 706 664 C986 610 1238 685 1600 610 L1600 900 L0 900 Z" fill="#050613"/>
+    <path d="M0 782 C290 730 540 775 818 720 C1098 665 1320 736 1600 688 L1600 900 L0 900 Z" fill="#03040b"/>
+  </g>
+  <g filter="url(#glow)" opacity="0.7">
+    <path d="M100 760 C360 720 500 740 718 708" stroke="#5af5ff" stroke-width="3" fill="none"/>
+    <path d="M905 726 C1120 696 1320 730 1506 690" stroke="#ff4fd8" stroke-width="3" fill="none"/>
+  </g>
+  <g opacity="0.13" stroke="#fff" stroke-width="1">
+    <path d="M0 120 H1600 M0 240 H1600 M0 360 H1600 M0 480 H1600 M0 600 H1600 M0 720 H1600 M0 840 H1600"/>
+  </g>
+</svg>

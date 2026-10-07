@@ -1,0 +1,28 @@
+/* A scene has one image source. Grain is a texture, never a second scene. */
+.scene-base, .dynamic-bg-layer { background-color: #080a15; }
+body.has-dynamic-background .radio-device:not(.custom-scene) .scene-base { visibility: hidden; }
+.dynamic-bg-layer { transition: none; }
+.dynamic-bg-layer:not(.is-active) { visibility: hidden; }
+.dynamic-bg-layer.is-active { visibility: visible; }
+.weather-overlay.effect-noise {
+  background-image: url('assets/textures/radio-noise.png');
+  background-repeat: repeat; background-size: 250px 250px;
+  opacity: .09; mix-blend-mode: soft-light;
+}
+/* The dedicated switch owns grain; the legacy effects cycle cannot double it. */
+body #weatherOverlay.effect-noise { opacity: 0; }
+#signalNoiseTexture { position: absolute; inset: 0; z-index: 3; pointer-events: none; opacity: 0; }
+.film-grain-on #signalNoiseTexture {
+  background-image: url('assets/textures/radio-noise.png');
+  background-size: 250px 250px; background-repeat: repeat;
+  opacity: .07; mix-blend-mode: soft-light;
+  animation: grainDrift 1s steps(4, end) infinite;
+}
+.tuning-overlay.is-active {
+  background: url('assets/textures/radio-noise.png') repeat 0 0 / 230px 230px;
+  opacity: .2; mix-blend-mode: soft-light;
+}
+@keyframes grainDrift { 25% { background-position: 60px -40px; } 50% { background-position: -40px 80px; } 75% { background-position: 100px 40px; } }
+.comfort-mode #signalNoiseTexture, .motion-paused #signalNoiseTexture, .reduced-motion #signalNoiseTexture { animation: none; }
+.comfort-mode #signalNoiseTexture, .reduced-motion #signalNoiseTexture { opacity: .025; }
+@media (prefers-reduced-motion: reduce) { .film-grain-on #signalNoiseTexture { animation: none; opacity: .025; } }

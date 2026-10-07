@@ -1,0 +1,347 @@
+/* The receiver and the quiet desk keep distinct materials and shared controls. */
+body[data-listening-mode="retro"] {
+  --bg: #0b1017;
+  --surface: #19222d;
+  --ink: #edf4f2;
+  --muted: #bac6cc;
+  --subtle: #93a2ac;
+  --display-font: "DM Sans", "Cairo", sans-serif;
+  background: radial-gradient(ellipse at 50% 0, rgba(var(--display-rgb), .055), transparent 65%), var(--bg);
+}
+body[data-listening-mode="lofi"] {
+  --bg: #101318;
+  --surface: #25272c;
+  --ink: #f3eee7;
+  --muted: #c1bbb6;
+  --subtle: #9e9c9c;
+  --accent-color: #dcc6b0;
+  --main-glow: 220, 198, 176;
+  --display-font: "Manrope", "Cairo", sans-serif;
+  background: radial-gradient(ellipse at 50% 0, #ae856514, transparent 65%), var(--bg);
+}
+body:is([data-listening-mode="retro"], [data-listening-mode="lofi"]) .header-actions > button { color: #d6dfdf; }
+body:is([data-listening-mode="retro"], [data-listening-mode="lofi"]).focus-mode .site-header {
+  border: 0;
+  background: linear-gradient(180deg, #08101edb, #08101eae 65%, #08101e68);
+  box-shadow: 0 7px 22px #03071030;
+  backdrop-filter: blur(8px);
+}
+body[data-listening-mode="retro"] .site-header > .listening-mode-switch button[aria-pressed="true"] { color: var(--display-ink); }
+body[data-listening-mode="lofi"] .site-header > .listening-mode-switch button[aria-pressed="true"] { color: #f0d8c2; }
+body:is([data-listening-mode="retro"], [data-listening-mode="lofi"]) .scene-caption { border-color: #ccdce026; background: #0c141dcc; color: #e2eae5; }
+
+/* Retro: a graphite chassis around matching recessed phosphor modules. */
+body[data-listening-mode="retro"]:not(.focus-mode) .radio-device {
+  padding: 18px 20px 13px;
+  border-color: #a4b7c02d;
+  border-radius: 24px;
+  background: linear-gradient(130deg, #313d49e8, #1b2632ef 45%, #29313dea);
+  box-shadow: inset 0 1px #efffff21, inset 0 -1px #0009, 0 22px 60px #0005;
+}
+body[data-listening-mode="retro"]:not(.focus-mode) .radio-screen { border-color: #060c12; border-radius: 14px; box-shadow: 0 1px #adc6d738, 0 0 0 1px #ffffff0a, inset 0 0 20px #0005; }
+body[data-listening-mode="retro"] .player-bar,
+body[data-listening-mode="retro"].focus-mode .player-bar {
+  direction: ltr;
+  grid-template-columns: minmax(230px, 1.18fr) minmax(170px, .82fr) 176px 88px;
+  align-items: center;
+  gap: 20px;
+}
+body[data-listening-mode="retro"]:not(.focus-mode) .player-bar { padding: 18px 0 0; }
+body[data-listening-mode="retro"].focus-mode .player-bar {
+  width: min(1100px, calc(100% - 48px));
+  padding: 18px 20px;
+  border-color: #a8c0cb33;
+  border-radius: 22px;
+  background: linear-gradient(125deg, #2b3744e6, #15212fed 65%, #24313fe6);
+  box-shadow: inset 0 1px #ecffff15, 0 18px 54px #0007;
+  backdrop-filter: blur(24px) saturate(110%);
+}
+body[data-listening-mode="retro"] .station-info { grid-column: 1; grid-row: 1; min-width: 0; }
+body[data-listening-mode="retro"] .receiver-lcd,
+body[data-listening-mode="retro"].focus-mode .receiver-lcd {
+  height: 126px; min-height: 126px; padding: 12px 15px;
+  border: 1px solid #08120f; border-radius: 10px;
+  background: linear-gradient(140deg, rgba(var(--display-rgb), .065), #081b1aed 55%, #0b1b1cf2);
+  box-shadow: inset 0 2px 12px #0007, 0 1px #e6ffff19;
+}
+body[data-listening-mode="retro"] .receiver-state { min-height: 13px; gap: 7px; }
+body[data-listening-mode="retro"] .station-label { font-size: 10px; letter-spacing: .8px; color: var(--display-muted); }
+body[data-listening-mode="retro"] .receiver-stereo { color: var(--display-muted); font-size: 9px; margin-left: 0; margin-right: 0; margin-inline-start: auto; }
+body[data-listening-mode="retro"] .frequency-readout { margin: 5px 0 3px; gap: 8px; }
+body[data-listening-mode="retro"] #freqValue { font-family: "Share Tech Mono", "VT323", monospace; font-size: 46px; letter-spacing: -.6px; }
+body[data-listening-mode="retro"] .frequency-readout small { font-size: 10px; }
+body[data-listening-mode="retro"] .band-label { font-size: 20px; }
+body[data-listening-mode="retro"] .station-info h2 { font-size: 15px; line-height: 1.4; font-weight: 600; letter-spacing: 0; }
+body[data-listening-mode="retro"] .station-info p { font-size: 11px; line-height: 1.45; margin-top: 3px; }
+body[data-listening-mode="retro"] .frequency-dial { margin-top: 8px; margin-inline: 3px; }
+body[data-listening-mode="retro"] .meter-module,
+body[data-listening-mode="retro"].focus-mode .meter-module {
+  grid-column: 2; grid-row: 1; height: 126px; min-height: 126px; padding: 12px 14px;
+  border: 1px solid #08120f; border-radius: 10px;
+  background: linear-gradient(140deg, rgba(var(--display-rgb), .065), #081b1aed 55%, #0b1b1cf2);
+  box-shadow: inset 0 2px 12px #0007, 0 1px #e6ffff19;
+}
+body[data-listening-mode="retro"] .meter-caption { font-size: 9px; color: var(--display-muted); }
+body[data-listening-mode="retro"] .retro-meter,
+body[data-listening-mode="retro"].focus-mode .retro-meter { height: 69px; gap: 5px; margin: 9px 0 7px; }
+body[data-listening-mode="retro"] .meter-axis { font-size: 9px; color: var(--display-muted); }
+body[data-listening-mode="retro"] .transport-module,
+body[data-listening-mode="retro"].focus-mode .transport-module { grid-column: 3; grid-row: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 0; }
+body[data-listening-mode="retro"] .playback-controls,
+body[data-listening-mode="retro"] .player-extras { display: flex; align-items: center; justify-content: center; gap: 9px; }
+body[data-listening-mode="retro"] .playback-controls .icon-button,
+body[data-listening-mode="retro"] .player-extras .icon-button { width: 46px; height: 44px; min-height: 44px; border-radius: 10px; border-color: #c9e5f31c; background: linear-gradient(#e8f7ff0b, #e8f7ff03); box-shadow: inset 0 1px #e8f7ff0d; color: #dbe5eb; }
+body[data-listening-mode="retro"] .play-button { width: 58px; height: 48px; min-height: 48px; border-radius: 10px; background: linear-gradient(145deg, var(--display-bright), var(--display-ink)); border-color: rgba(var(--display-rgb), .65); color: #12221f; box-shadow: inset 0 1px #fff8, 0 5px 16px #0004, 0 0 18px rgba(var(--display-rgb), .1); }
+body[data-listening-mode="retro"] .playback-controls .icon-button:hover,
+body[data-listening-mode="retro"] .player-extras .icon-button:hover { color: var(--display-bright); border-color: rgba(var(--display-rgb), .36); background: rgba(var(--display-rgb), .075); }
+body[data-listening-mode="retro"] .player-extras .icon-button[aria-pressed="true"] { color: var(--display-ink); border-color: rgba(var(--display-rgb), .4); }
+body[data-listening-mode="retro"] .dial-module,
+body[data-listening-mode="retro"].focus-mode .dial-module { grid-column: 4; grid-row: 1; gap: 8px; align-items: center; align-self: center; }
+body[data-listening-mode="retro"] .dial-label { color: #bac7cf; font-size: 9px; }
+body[data-listening-mode="retro"] .dial-control { width: 72px; height: 72px; border-color: #101b25; background: repeating-conic-gradient(#617382b3 0deg 2deg, #223344 2deg 6deg); box-shadow: 0 4px 12px #0006, 0 0 0 2px #c8e6f010, inset 0 1px #fff2; }
+body[data-listening-mode="retro"] .dial-control::after { border-color: #bad3e047; background: linear-gradient(145deg, #657a8c, #394c61 52%, #213449); }
+body[data-listening-mode="retro"] .dial-indicator::before { background: var(--display-bright); box-shadow: 0 0 5px rgba(var(--display-rgb), .45); }
+body[data-listening-mode="retro"] .dial-module output { font-size: 11px; color: #d5e2e7; }
+
+/* Lo-fi: a softer listening desk with one clear title and open round controls. */
+body[data-listening-mode="lofi"]:not(.focus-mode) .radio-device { border-color: #e0c7b326; border-radius: 24px; background: #151c25; box-shadow: 0 18px 54px #0005; }
+body[data-listening-mode="lofi"]:not(.focus-mode) .radio-screen { height: clamp(350px, 50vh, 590px); padding: 24px; }
+body[data-listening-mode="lofi"] .hero-scrim { background: linear-gradient(180deg, #11131845, transparent 38%, #13151c40); }
+body[data-listening-mode="lofi"] .player-bar,
+body[data-listening-mode="lofi"].focus-mode .player-bar {
+  direction: ltr; grid-template-columns: minmax(0, 1fr) 180px minmax(140px, .32fr); gap: 28px;
+  align-items: center; padding: 22px 26px; border-top-color: #e8d3c11f;
+  background: linear-gradient(115deg, #26272eec, #171f2ae8 60%, #24252de8);
+  box-shadow: inset 0 1px #e5d4c208;
+}
+body[data-listening-mode="lofi"].focus-mode .player-bar { width: min(980px, calc(100% - 48px)); border: 1px solid #e3ccba2b; border-radius: 23px; box-shadow: inset 0 1px #efdfd20c, 0 18px 54px #0006; backdrop-filter: blur(24px) saturate(90%); }
+body[data-listening-mode="lofi"] .station-info { grid-column: 1; grid-row: 1; min-width: 0; }
+body[data-listening-mode="lofi"] .receiver-lcd,
+body[data-listening-mode="lofi"].focus-mode .receiver-lcd { height: auto; min-height: 0; padding: 0; background: none; border: 0; box-shadow: none; overflow: hidden; }
+body[data-listening-mode="lofi"] .receiver-state { display: flex; gap: 6px; min-height: 15px; margin-bottom: 7px; }
+body[data-listening-mode="lofi"] .receiver-light { width: 4px; height: 4px; background: #9da89f; }
+body[data-listening-mode="retro"]:has(.radio-device.playing) .player-bar .receiver-light { background: var(--display-ink); box-shadow: 0 0 7px rgba(var(--display-rgb), .5); }
+body[data-listening-mode="lofi"]:has(.radio-device.playing) .player-bar .receiver-light { background: #bde0c0; box-shadow: 0 0 7px #bde0c044; }
+body[data-listening-mode="lofi"] .station-label { color: #c4c3b9; font-size: 10px; line-height: 1.5; letter-spacing: .85px; }
+body[data-listening-mode="lofi"] .station-info h2 { color: #f6efe7; font-size: 24px; line-height: 1.4; letter-spacing: -.4px; font-weight: 600; }
+body[data-listening-mode="lofi"] .station-info p { color: #c1c2c5; margin-top: 6px; font-size: 11px; line-height: 1.5; }
+body[data-listening-mode="lofi"] .transport-module,
+body[data-listening-mode="lofi"].focus-mode .transport-module { display: flex; flex-direction: column; align-items: center; justify-content: center; grid-column: 2; grid-row: 1; gap: 4px; padding: 0; }
+body[data-listening-mode="lofi"] .playback-controls,
+body[data-listening-mode="lofi"] .player-extras { display: flex; align-items: center; justify-content: center; gap: 9px; }
+body[data-listening-mode="lofi"] .playback-controls .icon-button,
+body[data-listening-mode="lofi"] .player-extras .icon-button { width: 44px; height: 44px; min-height: 44px; color: #d8d2ce; border: 0; background: transparent; box-shadow: none; border-radius: 50%; }
+body[data-listening-mode="lofi"] .play-button { width: 54px; height: 54px; min-width: 54px; min-height: 54px; border: 1px solid #ffebd157; border-radius: 50%; color: #342c2b; background: linear-gradient(145deg, #ecd9c5, #d5bca6); box-shadow: inset 0 1px #fff5, 0 5px 20px #08080e35; font-size: 16px; }
+body[data-listening-mode="lofi"] .play-button:hover { background: linear-gradient(145deg, #f8e7d3, #e6cdb5); }
+body[data-listening-mode="lofi"] .playback-controls .icon-button:hover,
+body[data-listening-mode="lofi"] .player-extras .icon-button:hover { color: #fae5ce; background: #e5c9ad10; }
+body[data-listening-mode="lofi"] .player-extras .icon-button[aria-pressed="true"] { color: #eac8a6; background: #e5c9ad10; }
+body[data-listening-mode="lofi"] .dial-module,
+body[data-listening-mode="lofi"].focus-mode .dial-module { grid-column: 3; grid-row: 1; gap: 6px 8px; }
+body[data-listening-mode="lofi"] .dial-label { font-size: 10px; color: #bab9b5; }
+body[data-listening-mode="lofi"] .dial-module output { font-size: 11px; color: #e4d2c0; }
+body[data-listening-mode="lofi"] .dial-control,
+body[data-listening-mode="lofi"].focus-mode .dial-control { width: 100%; height: 44px; }
+body[data-listening-mode="lofi"] #volumeDial { height: 44px !important; accent-color: #dec4a9; }
+
+/* The data modules keep a physical order while Arabic copy reads naturally. */
+html[dir="rtl"] body:is([data-listening-mode="retro"], [data-listening-mode="lofi"]) .receiver-lcd { direction: rtl; text-align: start; }
+html[dir="rtl"] body:is([data-listening-mode="retro"], [data-listening-mode="lofi"]) .station-label { letter-spacing: 0; }
+html[dir="rtl"] body[data-listening-mode="lofi"] .station-info h2 { letter-spacing: 0; }
+body:is([data-listening-mode="retro"], [data-listening-mode="lofi"]) .player-bar button:focus-visible { outline-color: var(--display-ink); outline-offset: 4px; }
+
+/* Keep the ordinary receiver between the physical shelves and tuning wheel. */
+@media (min-width: 1081px) and (min-height: 541px) {
+  body.radio-spatial-ready:is([data-listening-mode="retro"], [data-listening-mode="lofi"]):not(.focus-mode) {
+    --radio-normal-shelf-reserve: 406px;
+    --radio-normal-right-shelf-reserve: 421px;
+  }
+  body.radio-spatial-ready:is([data-listening-mode="retro"], [data-listening-mode="lofi"]):not(.focus-mode) .app-shell { width: 100%; padding: 0 24px; }
+  body.radio-spatial-ready:is([data-listening-mode="retro"], [data-listening-mode="lofi"]):not(.focus-mode) .radio-stage {
+    margin-left: var(--radio-normal-shelf-reserve);
+    margin-right: calc(var(--radio-dial-width) + 30px);
+    min-width: 0;
+    container-type: inline-size;
+    container-name: radio-receiver;
+  }
+  body.radio-spatial-ready[data-radio-panel-side="right"]:is([data-listening-mode="retro"], [data-listening-mode="lofi"]):not(.focus-mode) .radio-stage {
+    margin-left: 16px;
+    margin-right: calc(var(--radio-dial-width) + var(--radio-normal-right-shelf-reserve));
+  }
+  body.radio-spatial-ready:is([data-listening-mode="retro"], [data-listening-mode="lofi"]):not(.focus-mode):has(#channelMenu.panel-collapsed):has(#neonCommunityPanel.panel-collapsed) .radio-stage { margin-left: 72px; }
+  body.radio-spatial-ready[data-radio-panel-side="right"]:is([data-listening-mode="retro"], [data-listening-mode="lofi"]):not(.focus-mode):has(#channelMenu.panel-collapsed):has(#neonCommunityPanel.panel-collapsed) .radio-stage {
+    margin-left: 16px;
+    margin-right: calc(var(--radio-dial-width) + 74px);
+  }
+  @container radio-receiver (max-width: 700px) {
+    body.radio-spatial-ready[data-listening-mode="retro"]:not(.focus-mode) .player-bar { grid-template-columns: minmax(0, 1fr) 88px; gap: 16px; }
+    body.radio-spatial-ready[data-listening-mode="lofi"]:not(.focus-mode) .player-bar { grid-template-columns: minmax(0, 1fr) 110px; gap: 16px; padding: 20px; }
+    body.radio-spatial-ready:is([data-listening-mode="retro"], [data-listening-mode="lofi"]):not(.focus-mode) .station-info { grid-column: 1 / -1; grid-row: 1; }
+    body.radio-spatial-ready[data-listening-mode="retro"]:not(.focus-mode) .meter-module { display: none; }
+    body.radio-spatial-ready:is([data-listening-mode="retro"], [data-listening-mode="lofi"]):not(.focus-mode) .transport-module { grid-column: 1; grid-row: 2; align-items: flex-start; }
+    body.radio-spatial-ready:is([data-listening-mode="retro"], [data-listening-mode="lofi"]):not(.focus-mode) .dial-module { grid-column: 2; grid-row: 2; min-width: 0; }
+  }
+}
+@media (min-width: 1081px) and (max-width: 1400px) and (min-height: 541px) {
+  body.radio-spatial-ready:is([data-listening-mode="retro"], [data-listening-mode="lofi"]):not(.focus-mode) {
+    --radio-normal-shelf-reserve: 356px;
+    --radio-normal-right-shelf-reserve: 371px;
+  }
+}
+
+@media (max-width: 1100px) and (min-width: 701px) {
+  body[data-listening-mode="retro"] .player-bar,
+  body[data-listening-mode="retro"].focus-mode .player-bar { grid-template-columns: minmax(185px, 1.1fr) minmax(145px, .8fr) 164px 76px; gap: 14px; padding-inline: 16px; }
+  body[data-listening-mode="retro"] #freqValue { font-size: 40px; }
+  body[data-listening-mode="retro"] .receiver-lcd,
+  body[data-listening-mode="retro"] .meter-module { padding-inline: 12px; }
+  body[data-listening-mode="retro"] .playback-controls,
+  body[data-listening-mode="retro"] .player-extras { gap: 7px; }
+  body[data-listening-mode="retro"] .playback-controls .icon-button,
+  body[data-listening-mode="retro"] .player-extras .icon-button { width: 44px; }
+  body[data-listening-mode="retro"] .play-button { width: 54px; }
+  body[data-listening-mode="retro"] .dial-control { width: 66px; height: 66px; }
+  body[data-listening-mode="lofi"] .player-bar,
+  body[data-listening-mode="lofi"].focus-mode .player-bar { grid-template-columns: minmax(0, 1fr) 166px 130px; gap: 20px; padding-inline: 20px; }
+  body[data-listening-mode="lofi"] .station-info h2 { font-size: 22px; }
+}
+@media (max-width: 700px) {
+  body[data-listening-mode="retro"]:not(.focus-mode) .radio-device { padding: 11px; border-radius: 19px; }
+  body[data-listening-mode="retro"] .player-bar,
+  body[data-listening-mode="retro"].focus-mode .player-bar { grid-template-columns: minmax(0, 1fr) 104px; gap: 12px; padding: 13px 14px; width: calc(100% - 24px); border-radius: 19px; }
+  body[data-listening-mode="retro"]:not(.focus-mode) .player-bar { width: 100%; padding-inline: 0; }
+  body[data-listening-mode="retro"] .station-info { grid-column: 1; grid-row: 1; }
+  body[data-listening-mode="retro"] .receiver-lcd,
+  body[data-listening-mode="retro"].focus-mode .receiver-lcd { height: 112px; min-height: 112px; padding: 9px 12px; border-radius: 8px; }
+  body[data-listening-mode="retro"] .receiver-state { min-height: 11px; gap: 5px; }
+  body[data-listening-mode="retro"] .station-label { font-size: 9px; }
+  body[data-listening-mode="retro"] .receiver-stereo { display: none; }
+  body[data-listening-mode="retro"] .frequency-readout { gap: 6px; margin: 4px 0 2px; }
+  body[data-listening-mode="retro"] #freqValue { font-size: 38px; }
+  body[data-listening-mode="retro"] .band-label { font-size: 17px; }
+  body[data-listening-mode="retro"] .frequency-readout small { font-size: 9px; }
+  body[data-listening-mode="retro"] .station-info h2 { font-size: 14px; line-height: 1.35; }
+  body[data-listening-mode="retro"] .station-info p { font-size: 10px; line-height: 1.4; margin-top: 2px; }
+  body[data-listening-mode="retro"] .frequency-dial { display: none; }
+  body[data-listening-mode="retro"] .meter-module,
+  body[data-listening-mode="retro"].focus-mode .meter-module { grid-column: 2; grid-row: 1; height: 112px; min-height: 112px; padding: 10px 8px; border-radius: 8px; }
+  body[data-listening-mode="retro"] .meter-caption { font-size: 8px; letter-spacing: 0; }
+  body[data-listening-mode="retro"] .meter-stereo,
+  body[data-listening-mode="retro"] .meter-axis { display: none; }
+  body[data-listening-mode="retro"] .retro-meter,
+  body[data-listening-mode="retro"].focus-mode .retro-meter { height: 76px; margin: 7px 0 0; gap: 3px; }
+  body[data-listening-mode="retro"] .meter-column { gap: 2px; }
+  body[data-listening-mode="retro"] .transport-module,
+  body[data-listening-mode="retro"].focus-mode .transport-module { grid-column: 1; grid-row: 2; align-items: flex-start; gap: 7px; }
+  body[data-listening-mode="retro"] .playback-controls,
+  body[data-listening-mode="retro"] .player-extras { gap: 7px; }
+  body[data-listening-mode="retro"] .playback-controls .icon-button,
+  body[data-listening-mode="retro"] .player-extras .icon-button { width: 44px; }
+  body[data-listening-mode="retro"] .play-button { width: 54px; height: 46px; min-height: 46px; }
+  body[data-listening-mode="retro"] .dial-module,
+  body[data-listening-mode="retro"].focus-mode .dial-module { grid-column: 2; grid-row: 2; gap: 6px; }
+  body[data-listening-mode="retro"] .dial-control { width: 66px; height: 66px; }
+  body[data-listening-mode="lofi"]:not(.focus-mode) .radio-device { border-radius: 19px; }
+  body[data-listening-mode="lofi"]:not(.focus-mode) .radio-screen { height: clamp(300px, 44vh, 440px); padding: 16px; }
+  body[data-listening-mode="lofi"] .player-bar,
+  body[data-listening-mode="lofi"].focus-mode .player-bar { width: calc(100% - 24px); grid-template-columns: minmax(0, 1fr) 110px; gap: 12px; padding: 15px 17px; border-radius: 19px; }
+  body[data-listening-mode="lofi"]:not(.focus-mode) .player-bar { width: 100%; border-radius: 0; }
+  body[data-listening-mode="lofi"] .station-info { grid-column: 1 / -1; grid-row: 1; }
+  body[data-listening-mode="lofi"] .receiver-state { margin-bottom: 4px; }
+  body[data-listening-mode="lofi"] .station-info h2 { font-size: 21px; }
+  body[data-listening-mode="lofi"] .station-info p { font-size: 10px; margin-top: 4px; }
+  body[data-listening-mode="lofi"] .transport-module,
+  body[data-listening-mode="lofi"].focus-mode .transport-module { grid-column: 1; grid-row: 2; align-items: flex-start; gap: 3px; }
+  body[data-listening-mode="lofi"] .playback-controls,
+  body[data-listening-mode="lofi"] .player-extras { gap: 5px; }
+  body[data-listening-mode="lofi"] .play-button { width: 48px; height: 48px; min-width: 48px; min-height: 48px; }
+  body[data-listening-mode="lofi"] .dial-module,
+  body[data-listening-mode="lofi"].focus-mode .dial-module { grid-column: 2; grid-row: 2; gap: 6px; }
+}
+@media (max-width: 360px) {
+  body[data-listening-mode="retro"] .player-bar,
+  body[data-listening-mode="retro"].focus-mode .player-bar { grid-template-columns: minmax(0, 1fr) 84px; gap: 10px; padding: 12px; }
+  body[data-listening-mode="retro"] #freqValue { font-size: 34px; }
+  body[data-listening-mode="retro"] .receiver-lcd,
+  body[data-listening-mode="retro"].focus-mode .receiver-lcd { padding-inline: 9px; }
+  body[data-listening-mode="retro"] .station-info h2 { font-size: 13px; }
+  body[data-listening-mode="retro"] .station-info p { font-size: 9px; }
+  body[data-listening-mode="retro"] .retro-meter,
+  body[data-listening-mode="retro"].focus-mode .retro-meter { gap: 2px; }
+  body[data-listening-mode="retro"] .playback-controls,
+  body[data-listening-mode="retro"] .player-extras { gap: 5px; }
+  body[data-listening-mode="retro"] .playback-controls .icon-button,
+  body[data-listening-mode="retro"] .player-extras .icon-button { width: 44px; }
+  body[data-listening-mode="retro"] .play-button { width: 48px; }
+  body[data-listening-mode="retro"] .dial-control { width: 60px; height: 60px; }
+  body[data-listening-mode="lofi"] .player-bar,
+  body[data-listening-mode="lofi"].focus-mode .player-bar { grid-template-columns: minmax(0, 1fr) 98px; padding: 14px 12px; gap: 10px; }
+  body[data-listening-mode="lofi"] .station-info h2 { font-size: 20px; }
+  body[data-listening-mode="lofi"] .playback-controls,
+  body[data-listening-mode="lofi"] .player-extras { gap: 3px; }
+  body[data-listening-mode="lofi"] .playback-controls .icon-button { width: 42px; }
+  body[data-listening-mode="lofi"] .play-button { width: 46px; height: 46px; min-width: 46px; min-height: 46px; }
+}
+@media (max-height: 540px) and (min-width: 560px) {
+  body[data-listening-mode="retro"] .player-bar,
+  body[data-listening-mode="retro"].focus-mode .player-bar { width: min(1100px, calc(100% - 28px)); grid-template-columns: minmax(150px, 1.15fr) minmax(100px, .75fr) 156px 70px; gap: 12px; padding: 12px 14px; }
+  body[data-listening-mode="retro"] .station-info { grid-column: 1; grid-row: 1; }
+  body[data-listening-mode="retro"] .receiver-lcd,
+  body[data-listening-mode="retro"].focus-mode .receiver-lcd { height: 104px; min-height: 104px; padding: 8px 11px; }
+  body[data-listening-mode="retro"] #freqValue { font-size: 34px; }
+  body[data-listening-mode="retro"] .station-info h2 { font-size: 13px; }
+  body[data-listening-mode="retro"] .station-info p { font-size: 10px; }
+  body[data-listening-mode="retro"] .meter-module,
+  body[data-listening-mode="retro"].focus-mode .meter-module { display: block; grid-column: 2; grid-row: 1; height: 104px; min-height: 104px; padding: 9px; }
+  body[data-listening-mode="retro"] .retro-meter,
+  body[data-listening-mode="retro"].focus-mode .retro-meter { height: 68px; gap: 3px; margin: 7px 0 0; }
+  body[data-listening-mode="retro"] .meter-axis,
+  body[data-listening-mode="retro"] .frequency-dial { display: none; }
+  body[data-listening-mode="retro"] .transport-module,
+  body[data-listening-mode="retro"].focus-mode .transport-module { grid-column: 3; grid-row: 1; align-items: center; gap: 6px; }
+  body[data-listening-mode="retro"] .playback-controls,
+  body[data-listening-mode="retro"] .player-extras { gap: 5px; }
+  body[data-listening-mode="retro"] .playback-controls .icon-button,
+  body[data-listening-mode="retro"] .player-extras .icon-button { width: 44px; }
+  body[data-listening-mode="retro"] .play-button { width: 50px; height: 46px; min-height: 46px; }
+  body[data-listening-mode="retro"] .dial-module,
+  body[data-listening-mode="retro"].focus-mode .dial-module { grid-column: 4; grid-row: 1; gap: 5px; }
+  body[data-listening-mode="retro"] .dial-control { width: 60px; height: 60px; }
+  body[data-listening-mode="lofi"] .player-bar,
+  body[data-listening-mode="lofi"].focus-mode .player-bar { width: min(980px, calc(100% - 28px)); grid-template-columns: minmax(0, 1fr) 156px 120px; gap: 18px; padding: 13px 18px; }
+  body[data-listening-mode="lofi"] .station-info { grid-column: 1; grid-row: 1; }
+  body[data-listening-mode="lofi"] .station-info h2 { font-size: 21px; }
+  body[data-listening-mode="lofi"] .station-info p { font-size: 10px; }
+  body[data-listening-mode="lofi"] .transport-module,
+  body[data-listening-mode="lofi"].focus-mode .transport-module { grid-column: 2; grid-row: 1; align-items: center; gap: 0; }
+  body[data-listening-mode="lofi"] .playback-controls,
+  body[data-listening-mode="lofi"] .player-extras { gap: 5px; }
+  body[data-listening-mode="lofi"] .play-button { width: 48px; height: 48px; min-width: 48px; min-height: 48px; }
+  body[data-listening-mode="lofi"] .dial-module,
+  body[data-listening-mode="lofi"].focus-mode .dial-module { grid-column: 3; grid-row: 1; }
+}
+@media (max-height: 540px) and (min-width: 560px) and (max-width: 700px) {
+  body[data-listening-mode="retro"] .meter-module,
+  body[data-listening-mode="retro"].focus-mode .meter-module { display: none; }
+  body[data-listening-mode="retro"] .player-bar,
+  body[data-listening-mode="retro"].focus-mode .player-bar { grid-template-columns: minmax(0, 1fr) 156px 64px; gap: 10px; padding-inline: 12px; }
+  body[data-listening-mode="retro"] .transport-module,
+  body[data-listening-mode="retro"].focus-mode .transport-module { grid-column: 2; }
+  body[data-listening-mode="retro"] .dial-module,
+  body[data-listening-mode="retro"].focus-mode .dial-module { grid-column: 3; }
+  body[data-listening-mode="lofi"] .player-bar,
+  body[data-listening-mode="lofi"].focus-mode .player-bar { grid-template-columns: minmax(0, 1fr) 150px 98px; gap: 10px; padding-inline: 13px; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  body[data-listening-mode="retro"] .player-bar,
+  body[data-listening-mode="retro"].focus-mode .player-bar { background: #1e2b38; backdrop-filter: none; }
+  body[data-listening-mode="lofi"] .player-bar,
+  body[data-listening-mode="lofi"].focus-mode .player-bar { background: #222830; backdrop-filter: none; }
+}
+@media (prefers-contrast: more) {
+  body:is([data-listening-mode="retro"], [data-listening-mode="lofi"]) .player-bar { border-color: #a3b4bb; }
+  body[data-listening-mode="retro"] .receiver-lcd,
+  body[data-listening-mode="retro"] .meter-module { border-color: var(--display-muted); }
+  body[data-listening-mode="lofi"] .station-label,
+  body[data-listening-mode="lofi"] .station-info p { color: #e3dbd2; }
+}

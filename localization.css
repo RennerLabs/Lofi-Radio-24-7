@@ -1,0 +1,104 @@
+/* RTL is an independent layer shared by every listening theme and the studio. */
+html[lang="ar"] {
+  --arabic-ui-font: "Cairo", "Segoe UI", Tahoma, Arial, sans-serif;
+}
+html[lang="ar"] body,
+html[lang="ar"] button,
+html[lang="ar"] input,
+html[lang="ar"] textarea,
+html[lang="ar"] select {
+  font-family: var(--arabic-ui-font);
+}
+.brand-lockup, .studio-brand h1, .studio-mark, .screen-signature,
+.frequency-readout, .frequency-dial, .meter-stereo, .hero-time,
+.ch-freq, .dial-control, #dialValue, .preview-channel-strip > span:first-child,
+#stationPreviewFrequency, #adminEmail, #adminUid, .background-src-preview {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+html[dir="rtl"] .header-note,
+html[dir="rtl"] .eyebrow,
+html[dir="rtl"] .transport-label,
+html[dir="rtl"] .meter-caption,
+html[dir="rtl"] .dial-label,
+html[dir="rtl"] .receiver-state,
+html[dir="rtl"] .station-label,
+html[dir="rtl"] .preview-eyebrow,
+html[dir="rtl"] .section-heading > div > p,
+html[dir="rtl"] .studio-brand p {
+  letter-spacing: 0;
+  font-family: var(--arabic-ui-font);
+}
+html[dir="rtl"] .receiver-lcd { text-align: start; }
+html[dir="rtl"] .frequency-readout { text-align: left; }
+html[dir="rtl"] .ch-copy,
+html[dir="rtl"] .station-info,
+html[dir="rtl"] .section-heading,
+html[dir="rtl"] .studio-form label,
+html[dir="rtl"] .admin-list-controls label,
+html[dir="rtl"] .access-content,
+html[dir="rtl"] .media-library-details { text-align: start; }
+html[dir="rtl"] .search-box { direction: rtl; }
+html[dir="rtl"] .playback-controls,
+html[dir="rtl"] .player-extras,
+html[dir="rtl"] .frequency-scale,
+html[dir="rtl"] .retro-meter,
+html[dir="rtl"] .meter-module,
+html[dir="rtl"] .meter-axis { direction: ltr; }
+html[dir="rtl"] .chat-name-row,
+html[dir="rtl"] .chat-input-row,
+html[dir="rtl"] .playlist-input-row { direction: rtl; }
+html[dir="rtl"] #chatInput { text-align: start; unicode-bidi: plaintext; }
+#chatNameInput, #playlistUrlInput, #stationYoutubeInput,
+#stationFrequencyInput, #stationThumbnailInput, #stationBackgroundVideoInput,
+#stationBackgroundImageInput, #stationBackgroundGifInput, #backgroundSrcInput,
+#backgroundPosterInput, #backgroundMoodInput, #mediaUrlInput {
+  direction: ltr;
+  text-align: left;
+}
+.chat-items .chat-text, .chat-items .chat-message-text,
+.ch-name, #stationName, #barStationName, .admin-station-main strong,
+.admin-background-main strong, .media-library-details strong {
+  unicode-bidi: plaintext;
+}
+.language-toggle {
+  min-inline-size: 46px;
+  min-block-size: 44px;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 700;
+}
+html[dir="rtl"] .language-toggle { letter-spacing: 0; }
+.studio-header-actions { display: flex; align-items: center; gap: 10px; }
+.studio-header-actions .language-toggle {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 0 12px; color: #ece8f5; cursor: pointer;
+  border: 1px solid #d9e4fa24; border-radius: 10px; background: #17213173;
+}
+.studio-header-actions .language-toggle:hover { border-color: #dfc6ff5a; background: #312b4299; }
+.studio-header-actions .language-toggle:focus-visible { outline: 2px solid #c0a5ed; outline-offset: 3px; }
+html[dir="rtl"] .drawer .drawer-close {
+  right: auto;
+  left: 20px;
+}
+html[dir="rtl"] .drawer .panel-heading { padding-right: 0; padding-left: 38px; }
+html[dir="rtl"] .studio-form,
+html[dir="rtl"] .admin-list-controls { direction: rtl; }
+html[dir="rtl"] .form-actions { justify-content: flex-start; }
+html[dir="rtl"] .studio-message,
+html[dir="rtl"] .chat-mode-hint,
+html[dir="rtl"] .playlist-mode-hint,
+html[dir="rtl"] .settings-tip { line-height: 1.8; }
+html[dir="rtl"] .access-pill,
+html[dir="rtl"] .station-badges span,
+html[dir="rtl"] .background-badges span { letter-spacing: 0; }
+html[dir="rtl"] .scene-picker button { font-size: 12px; }
+@media (max-width: 620px) {
+  html[dir="rtl"] .drawer .drawer-close { left: 16px; }
+  html[dir="rtl"] .receiver-lcd { min-inline-size: 0; }
+  html[dir="rtl"] .station-label { font-size: 9px; }
+  html[dir="rtl"] .receiver-stereo { font-size: 8px; }
+}
+/* Mixed channel names and listener-written text keep their own reading order. */
+#neonStationName, #neonDescription, .neon-chat-name, .neon-chat-message,
+.neon-queue-name, .neon-queue-track { unicode-bidi: plaintext; }

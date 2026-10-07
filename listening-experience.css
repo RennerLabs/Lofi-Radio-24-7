@@ -1,0 +1,131 @@
+/* Free of new panels: light, motion and the receiver's existing display color. */
+.fold-panel-toggle.experience-fold-toggle { position: relative; overflow: visible; isolation: isolate; filter: none; }
+.experience-fold-toggle > i { opacity: 0; }
+.experience-fold-orbit { position: absolute; inset: 8px; display: grid; place-items: center; pointer-events: none; color: var(--display-ink, #bbf4ee); filter: drop-shadow(0 0 5px rgba(var(--display-rgb, 90, 231, 230), .35)); }
+.experience-fold-orbit::before, .experience-fold-orbit::after { content: ""; position: absolute; inset: 0; border: 1px solid transparent; border-top-color: currentColor; border-bottom-color: currentColor; border-radius: 50%; opacity: .35; transform: rotate(-38deg); transition: transform .65s cubic-bezier(.2,.75,.25,1), opacity .3s; }
+.experience-fold-orbit::after { inset: 4px; border-top-color: transparent; border-bottom-color: transparent; border-inline-color: currentColor; transform: rotate(-38deg); opacity: .16; }
+.experience-fold-arrow { position: relative; width: 10px; height: 10px; transform: rotate(-45deg); transition: transform .48s cubic-bezier(.2,.8,.2,1); }
+.experience-fold-arrow::before, .experience-fold-arrow::after { content: ""; position: absolute; width: 6px; height: 6px; border-top: 1.5px solid currentColor; border-left: 1.5px solid currentColor; }
+.experience-fold-arrow::before { inset: 1px auto auto 0; }
+.experience-fold-arrow::after { inset: 4px auto auto 3px; opacity: .32; }
+.experience-fold-toggle[data-fold-direction="right"] .experience-fold-arrow { transform: rotate(135deg); }
+.experience-fold-toggle[aria-expanded="false"] .experience-fold-orbit::before { transform: rotate(142deg); opacity: .55; }
+.experience-fold-toggle[aria-expanded="false"] .experience-fold-orbit::after { transform: rotate(-142deg); }
+.experience-fold-toggle:hover .experience-fold-orbit::before, .experience-fold-toggle:focus-visible .experience-fold-orbit::before { transform: rotate(35deg); opacity: .75; }
+.experience-fold-toggle:hover .experience-fold-orbit::after, .experience-fold-toggle:focus-visible .experience-fold-orbit::after { transform: rotate(-105deg); opacity: .38; }
+.experience-fold-toggle:active .experience-fold-orbit { scale: .9; }
+
+/* Keep the artwork node for source metadata updates; only the decorative slot changes. */
+body #neonNowArt.cassette-art-replaced { display: none; }
+.renner-cassette { display: none; }
+body[data-listening-mode="neon"] .renner-cassette {
+    --cassette-glow: rgba(var(--display-rgb, 90, 231, 230), .3);
+    position: relative; display: block; flex: 0 0 74px; width: 74px; height: 49px; overflow: hidden;
+    border: 1px solid rgba(var(--display-rgb, 90, 231, 230), .38); border-radius: 5px;
+    background: linear-gradient(150deg, #303047d9, #151527f2 45%, #17182ff2);
+    box-shadow: inset 0 1px #ffffff24, inset 0 -2px #03030b99, 0 0 12px var(--cassette-glow);
+    color: var(--display-ink, #bbf4ee); isolation: isolate;
+}
+.renner-cassette::before { content: ""; position: absolute; inset: 5px 4px 13px; border: 1px solid #d6d2fb24; border-radius: 3px; background: repeating-linear-gradient(0deg, transparent 0 2px, #9a97ae0d 2px 3px); }
+.renner-cassette::after { content: ""; position: absolute; inset: auto 0 4px; height: 2px; background: linear-gradient(90deg, transparent 8%, #20daea 8% 35%, #ce55e9 35% 62%, #ff7052 62% 91%, transparent 91%); opacity: .55; }
+.cassette-label { position: absolute; top: 6px; left: 12px; font: 600 5px/1.2 ui-monospace, monospace; letter-spacing: 1.2px; opacity: .75; }
+.cassette-side { position: absolute; top: 6px; right: 8px; font: 700 6px/1 ui-monospace, monospace; opacity: .6; }
+.cassette-window { position: absolute; top: 15px; left: 10px; right: 10px; height: 17px; display: flex; justify-content: space-between; align-items: center; padding: 0 3px; border: 1px solid #080811c9; border-radius: 8px; background: #050511ad; box-shadow: inset 0 1px 3px #000a; }
+.cassette-reel { position: relative; width: 13px; height: 13px; z-index: 1; border: 2px solid #70637e; border-radius: 50%; background: #181324; box-shadow: 0 0 0 1px #ae8ead40; }
+.cassette-reel-right { border-width: 1px; }
+.cassette-spindle { display: block; position: absolute; inset: 1px; border-radius: 50%; background: repeating-conic-gradient(from 15deg, currentColor 0deg 15deg, transparent 15deg 120deg); animation: cassette-spin 2.8s linear infinite; animation-play-state: paused; }
+.cassette-spindle::after { content: ""; position: absolute; inset: 3px; border-radius: 50%; background: #100f23; }
+.cassette-reel-right .cassette-spindle { animation-duration: 2.1s; }
+.cassette-tape { position: absolute; left: 12px; right: 12px; top: 7px; height: 2px; opacity: .4; background: currentColor; box-shadow: 0 3px #bbb0e114; }
+.cassette-mouth { position: absolute; left: 22px; right: 22px; bottom: 7px; height: 7px; border: 1px solid #9a8eae30; clip-path: polygon(12% 0, 88% 0, 100% 100%, 0 100%); background: linear-gradient(90deg, transparent 20%, #c2b1cb40 20% 27%, transparent 27% 73%, #c2b1cb40 73% 80%, transparent 80%); }
+.cassette-screw { position: absolute; width: 2px; height: 2px; border-radius: 50%; background: #95839a; opacity: .4; }
+.cassette-screw-0 { left: 3px; top: 3px; }.cassette-screw-1 { right: 3px; top: 3px; }.cassette-screw-2 { left: 3px; bottom: 3px; }.cassette-screw-3 { right: 3px; bottom: 3px; }
+.renner-cassette.is-playing:not(.is-document-hidden) .cassette-spindle { animation-play-state: running; }
+@keyframes cassette-spin { to { transform: rotate(360deg); } }
+
+.content-footer.has-renner-quote { align-items: center; }
+.renner-quote-slot { display: inline-flex; flex-wrap: wrap; column-gap: 12px; row-gap: 3px; min-width: 0; line-height: 1.65; }
+.renner-quote-line { display: inline-grid; min-width: 0; max-width: 100%; }
+.renner-quote-line > q { grid-area: 1 / 1; }
+.renner-quote-measure { visibility: hidden; pointer-events: none; }
+.renner-quote-text { color: #d9dcef; font-weight: 400; quotes: "“" "”" "‘" "’"; }
+.renner-quote-slot[dir="rtl"] .renner-quote-text { quotes: "«" "»" "‹" "›"; }
+.renner-quote-text.is-typing::after { content: ""; display: inline-block; height: .85em; width: 1px; margin-inline-start: 3px; background: var(--display-ink, #a1edf2); opacity: .8; vertical-align: -.05em; }
+.renner-quote-credit { display: inline-flex; align-items: center; gap: 4px; color: #a8a8c7; font-size: .92em; text-decoration: none; transition: color .2s; }
+.renner-quote-credit::before { content: "—"; color: #8885a6; }
+.renner-quote-credit:hover, .renner-quote-credit:focus-visible { color: var(--display-ink, #a1edf2); }
+.quote-source-arrow { font-size: 10px; opacity: .5; }
+/* Reserve the quote's actual wrapped height beneath every immersive receiver. */
+body.quote-experience-on.focus-mode .content-footer.has-renner-quote,
+body.quote-experience-on[data-listening-mode="neon"] .content-footer.has-renner-quote { z-index: 65; inset: auto 24px max(8px, env(safe-area-inset-bottom));
+    display: flex; flex-direction: row; visibility: visible; padding: 0; margin: 0;
+    color: #afb4e4; font-size: 11px; line-height: 1.65; text-shadow: 0 1px 5px #050615;
+    pointer-events: none;
+}
+body.quote-experience-on.focus-mode .renner-quote-credit,
+body.quote-experience-on[data-listening-mode="neon"] .renner-quote-credit { pointer-events: auto; }
+body.quote-experience-on.focus-mode .content-footer .community-status { display: none; }
+body.quote-experience-on.focus-mode .player-bar,
+body.quote-experience-on[data-listening-mode="neon"] .player-bar {
+    bottom: calc(var(--renner-quote-footer-height, 36px) + max(20px, env(safe-area-inset-bottom)));
+}
+body.quote-experience-on.focus-mode .radio-screen .tuning-status,
+body.quote-experience-on[data-listening-mode="neon"] .radio-screen .tuning-status {
+    bottom: calc(var(--renner-player-bar-height, 150px) + var(--renner-quote-footer-height, 36px) + max(30px, env(safe-area-inset-bottom)));
+}
+/* Wrapped quotes raise the receiver dock; its frequency shelf must clear it too. */
+body.quote-experience-on.focus-mode:not([data-listening-mode="neon"]) #channelMenu {
+    --renner-shelf-top: 124px;
+    --renner-dock-gap: 20px;
+    max-height: calc(100dvh - var(--renner-shelf-top) - var(--renner-player-bar-height, 232px) - var(--renner-quote-footer-height, 52px) - max(var(--renner-dock-gap), env(safe-area-inset-bottom)) - 12px);
+}
+@media (max-width: 700px) {
+    body.quote-experience-on.focus-mode:not([data-listening-mode="neon"]) #channelMenu { --renner-shelf-top: 194px; --renner-dock-gap: 18px; }
+}
+@media (max-width: 360px) {
+    body.quote-experience-on.focus-mode:not([data-listening-mode="neon"]) #channelMenu { --renner-shelf-top: 234px; }
+}
+@media (max-height: 540px) and (min-width: 560px) {
+    body.quote-experience-on.focus-mode:not([data-listening-mode="neon"]) #channelMenu { --renner-shelf-top: 72px; }
+}
+@media (max-height: 540px) and (min-width: 560px) and (max-width: 700px) {
+    body.quote-experience-on.focus-mode:not([data-listening-mode="neon"]) #channelMenu { --renner-shelf-top: 138px; }
+}
+@media (min-width: 1081px) {
+    body[data-listening-mode="neon"] .renner-quote-slot { max-width: calc(100% - 20px); }
+}
+@media (max-width: 1080px) {
+    body.quote-experience-on[data-listening-mode="neon"] #mainContent { padding-bottom: calc(166px + var(--renner-quote-footer-height, 36px)); }
+    body[data-listening-mode="neon"] .renner-cassette { flex-basis: 60px; width: 60px; height: 43px; }
+    body[data-listening-mode="neon"] .cassette-window { left: 6px; right: 6px; }
+    body[data-listening-mode="neon"] .cassette-mouth { left: 17px; right: 17px; height: 4px; }
+}
+@media (max-width: 700px) {
+    body.quote-experience-on.focus-mode .content-footer.has-renner-quote,
+    body.quote-experience-on[data-listening-mode="neon"] .content-footer.has-renner-quote { inset-inline: 16px; font-size: 10px; }
+    body.quote-experience-on.focus-mode .player-bar,
+    body.quote-experience-on[data-listening-mode="neon"] .player-bar { bottom: calc(var(--renner-quote-footer-height, 48px) + max(18px, env(safe-area-inset-bottom))); }
+    body[data-listening-mode="neon"] .renner-cassette { flex-basis: 48px; width: 48px; height: 35px; }
+    body[data-listening-mode="neon"] .cassette-window { top: 11px; left: 5px; right: 5px; height: 14px; padding: 0 2px; }
+    body[data-listening-mode="neon"] .cassette-label { top: 5px; left: 8px; font-size: 4px; letter-spacing: .7px; }
+    body[data-listening-mode="neon"] .cassette-side { top: 5px; right: 5px; font-size: 4px; }
+    body[data-listening-mode="neon"] .cassette-reel { width: 10px; height: 10px; border-width: 1px; }
+    body[data-listening-mode="neon"] .cassette-spindle::after { inset: 2px; }
+    body[data-listening-mode="neon"] .cassette-tape { left: 9px; right: 9px; top: 6px; height: 1px; }
+    body[data-listening-mode="neon"] .cassette-mouth { bottom: 5px; left: 14px; right: 14px; height: 3px; }
+    .renner-quote-slot { row-gap: 2px; column-gap: 7px; }
+    .renner-quote-credit { font-size: 10px; }
+}
+@media (max-width: 390px) {
+    body[data-listening-mode="neon"] .renner-cassette { flex-basis: 40px; width: 40px; height: 31px; }
+    body[data-listening-mode="neon"] .cassette-window { left: 3px; right: 3px; }
+    body[data-listening-mode="neon"] .cassette-mouth { display: none; }
+    body[data-listening-mode="neon"] .cassette-label { left: 6px; letter-spacing: .3px; }
+}
+.comfort-mode .cassette-spindle, .reduced-motion .cassette-spindle, .motion-paused .cassette-spindle { animation-play-state: paused !important; }
+.comfort-mode .experience-fold-orbit, .comfort-mode .experience-fold-orbit::before, .comfort-mode .experience-fold-orbit::after, .comfort-mode .experience-fold-arrow,
+.reduced-motion .experience-fold-orbit, .reduced-motion .experience-fold-orbit::before, .reduced-motion .experience-fold-orbit::after, .reduced-motion .experience-fold-arrow { transition: none; }
+@media (prefers-reduced-motion: reduce) {
+    .cassette-spindle { animation: none; }
+    .experience-fold-orbit, .experience-fold-orbit::before, .experience-fold-orbit::after, .experience-fold-arrow, .renner-quote-credit { transition: none; }
+}

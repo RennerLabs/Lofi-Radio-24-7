@@ -1,0 +1,175 @@
+/* A transparent rotary frequency scale with live radio labels. */
+.station-tuner {
+  position: relative;
+  flex: 0 0 auto;
+  min-width: 0;
+  height: 185px;
+  width: 100%;
+  max-width: 360px;
+  margin: 4px auto 11px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--display-ink);
+  isolation: isolate;
+}
+.station-tuner-scale { position: absolute; inset: 0 0 auto; height: 148px; direction: ltr; touch-action: none; cursor: grab; }
+.station-tuner-scale:active { cursor: grabbing; }
+.station-tuner-scale canvas { display: block; width: 100%; height: 148px; }
+.station-tuner-readout {
+  position: absolute;
+  top: 35px;
+  left: 55%;
+  right: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  gap: 2px;
+  pointer-events: none;
+}
+#stationTunerName { order: 0; max-width: 100%; color: #e4e6f3; font-family: "Share Tech Mono", "Cairo", sans-serif; font-size: 10px; line-height: 1.5; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; unicode-bidi: plaintext; }
+#stationTunerFrequency { order: 1; color: var(--display-bright); font-family: "Share Tech Mono", "VT323", monospace; font-size: 40px; font-weight: 400; letter-spacing: -1.2px; line-height: 1.14; direction: ltr; unicode-bidi: isolate; text-shadow: 0 0 19px rgba(var(--display-rgb), .34); }
+.station-tuner-band { order: 2; color: var(--accent-color); font-size: 11px; letter-spacing: 2px; line-height: 1.5; direction: ltr; }
+.station-tuner-position { order: 3; color: var(--display-muted); font-family: "Share Tech Mono", monospace; font-size: 10px; direction: ltr; opacity: .85; }
+#stationTunerRange {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 27px;
+  width: calc(100% - 28px);
+  height: 22px;
+  margin: 0;
+  padding: 0;
+  direction: ltr;
+  accent-color: rgb(var(--display-rgb));
+  cursor: ew-resize;
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  background: transparent;
+}
+#stationTunerRange::-webkit-slider-runnable-track { height: 1px; background: rgba(var(--display-rgb), .24); }
+#stationTunerRange::-moz-range-track { height: 1px; background: rgba(var(--display-rgb), .24); }
+#stationTunerRange::-webkit-slider-thumb { width: 11px; height: 11px; margin-top: -5px; border: 1px solid var(--display-bright); border-radius: 50%; background: rgb(var(--display-rgb)); box-shadow: 0 0 10px rgba(var(--display-rgb), .6); appearance: none; -webkit-appearance: none; }
+#stationTunerRange::-moz-range-thumb { width: 10px; height: 10px; border: 1px solid var(--display-bright); border-radius: 50%; background: rgb(var(--display-rgb)); box-shadow: 0 0 10px rgba(var(--display-rgb), .6); }
+#stationTunerRange:disabled { opacity: .25; cursor: default; }
+#stationTunerRange:focus-visible { outline: 1px solid rgba(var(--display-rgb), .75); outline-offset: 3px; border-radius: 3px; }
+.station-tuner-help { position: absolute; left: 8px; right: 8px; bottom: 2px; margin: 0; color: #aeb8c8; font-size: 9px; line-height: 1.6; text-align: center; }
+.station-tuner[data-outside-filter="true"] .station-tuner-help { color: var(--display-muted); }
+html[dir="rtl"] .station-tuner-readout { direction: rtl; align-items: flex-end; }
+html[dir="rtl"] #stationTunerName { font-family: "Cairo", "Share Tech Mono", sans-serif; }
+
+/* The frequency shelf keeps its heading, filters and dial while rows scroll. */
+body[data-listening-mode="neon"] #channelMenu,
+body[data-listening-mode="neon"].focus-mode #channelMenu,
+body.focus-mode:not([data-listening-mode="neon"]) #channelMenu { overflow: hidden; }
+body[data-listening-mode="neon"] #channelMenuContent,
+body.focus-mode:not([data-listening-mode="neon"]) #channelMenuContent { display: flex; flex-direction: column; min-height: 0; flex: 1 1 auto; overflow: hidden; }
+#channelMenuContent > .channel-heading,
+#channelMenuContent > .browse-toolbar,
+#channelMenuContent > .station-tuner { flex-shrink: 0; }
+body #channelsListContainer {
+  min-height: 0;
+  max-height: min(52dvh, 570px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(var(--display-rgb), .32) transparent;
+  scroll-behavior: smooth;
+  scroll-padding-block: 7px;
+  align-content: start;
+  grid-auto-rows: max-content;
+}
+body[data-listening-mode="neon"] #channelsListContainer,
+body.focus-mode:not([data-listening-mode="neon"]) #channelsListContainer { flex: 1 1 auto; }
+#channelsListContainer .station-card { scroll-margin-block: 7px; }
+body[data-listening-mode="neon"] #neonCommunityPanel { overflow: hidden; }
+body[data-listening-mode="neon"] #communityPanelContent { min-height: 0; overflow-y: auto; overflow-x: hidden; scrollbar-width: thin; }
+body[data-listening-mode="neon"] #communityPanelContent > .neon-widget { flex-shrink: 0; }
+
+/* Availability stays visible beside an independent, reachable recheck action. */
+.ch-availability { color: #ffb6be; font-size: 9px; line-height: 1.5; white-space: normal; }
+.station-card[data-availability="partial"] .ch-availability { color: #efd099; }
+.station-card[data-availability="unavailable"] .channel-item,
+.station-card[data-availability="partial"] .channel-item,
+body[data-listening-mode="neon"] .station-card[data-availability="unavailable"] .channel-item,
+body[data-listening-mode="neon"] .station-card[data-availability="partial"] .channel-item,
+body.focus-mode:not([data-listening-mode="neon"]) #channelMenu .station-card[data-availability="unavailable"] .channel-item,
+body.focus-mode:not([data-listening-mode="neon"]) #channelMenu .station-card[data-availability="partial"] .channel-item { min-height: 98px; padding-inline-end: 72px; }
+.station-card[data-availability="unavailable"] .channel-item { border-color: #c260733e; background: #441c2c26; }
+.station-card[data-availability="unavailable"] .ch-thumb { filter: grayscale(.6); opacity: .5; }
+.station-card[data-availability="unavailable"] .ch-signal { opacity: .25; }
+.availability-retry {
+  position: absolute;
+  bottom: 7px;
+  inset-inline-end: 7px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 54px;
+  min-height: 32px;
+  padding: 4px 7px;
+  border: 1px solid #e4a2aa30;
+  border-radius: 5px;
+  background: #2615258c;
+  color: #f4c1c8;
+  font-size: 10px;
+  line-height: 1.5;
+}
+.availability-retry:hover { border-color: #f4c1c866; background: #4c2332a3; }
+.station-card[data-availability="unavailable"] .favorite-button,
+.station-card[data-availability="partial"] .favorite-button { top: 9px; transform: none; }
+
+@media (min-width: 1081px) and (max-height: 650px) {
+  .station-tuner { height: 149px; }
+  .station-tuner-scale { height: 123px; overflow: hidden; }
+  .station-tuner-readout { top: 30px; }
+  #stationTunerFrequency { font-size: 33px; }
+  #stationTunerRange { bottom: 20px; }
+  .station-tuner-help { font-size: 8px; }
+}
+@media (max-width: 1080px) {
+  /* These panels flow with the page; only the frequency list contains scroll. */
+  body[data-listening-mode="neon"] #channelMenu,
+  body[data-listening-mode="neon"].focus-mode #channelMenu,
+  body[data-listening-mode="neon"] #channelMenuContent,
+  body[data-listening-mode="neon"] #neonCommunityPanel,
+  body[data-listening-mode="neon"] #communityPanelContent {
+    overflow: visible;
+    overscroll-behavior: auto;
+  }
+  body[data-listening-mode="neon"] #channelsListContainer { flex: none; max-height: min(58dvh, 450px); }
+}
+@media (max-width: 700px) {
+  .station-tuner { height: 176px; margin-bottom: 9px; }
+  .station-tuner-readout { top: 31px; }
+  #stationTunerFrequency { font-size: 38px; }
+  .station-tuner-help { font-size: 9px; }
+}
+/* A compact receiver shelf can scroll past its dial to every frequency. */
+@media (max-width: 1080px), (max-height: 700px) {
+  body.focus-mode:not([data-listening-mode="neon"]) #channelMenuContent {
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(var(--display-rgb), .32) transparent;
+    scroll-padding-block: 8px;
+  }
+  body.focus-mode:not([data-listening-mode="neon"]) #channelsListContainer {
+    flex: 0 0 auto;
+    max-height: none;
+    overflow: visible;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  body #channelsListContainer { scroll-behavior: auto; }
+}
+@media (prefers-contrast: more) {
+  .station-tuner-help { color: #e2eaf4; }
+  #stationTunerRange::-webkit-slider-runnable-track { background: var(--display-ink); }
+  #stationTunerRange::-moz-range-track { background: var(--display-ink); }
+}

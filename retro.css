@@ -1,0 +1,1115 @@
+/* Slim graphite receiver, phosphor display, and restrained after-hours neon. */
+:root {
+  --vfd: #b7ffd0;
+  --vfd-bright: #e0ffe8;
+  --vfd-muted: #97bca5;
+  --retro-font: 'VT323','Courier New',monospace;
+}
+
+/* Chassis, screws and scene frame. */
+.radio-device {
+  height: auto;
+  min-height: 0;
+  display: block;
+  overflow: visible;
+  padding: 19px 21px 12px;
+  border: 1px solid #535765;
+  border-radius: 21px;
+  background: linear-gradient(145deg,#323742,#222731 20%,#242832 77%,#30343e);
+  box-shadow: inset 0 1px #f3f5ff18,inset 0 -2px 4px #080b1280,0 20px 50px #0005,0 1px 3px #0009;
+}
+
+.radio-device::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  pointer-events: none;
+  border: 1px solid #c3bfe10b;
+}
+
+.chassis-screw {
+  position: absolute;
+  z-index: 3;
+  width: 6px;
+  height: 6px;
+  border: 1px solid #080b12;
+  border-radius: 50%;
+  background: linear-gradient(135deg,#7b8190,#343946);
+  box-shadow: 0 1px 1px #fff1;
+}
+
+.chassis-screw::after {
+  content: '';
+  position: absolute;
+  left: 1px;
+  right: 1px;
+  top: 2px;
+  height: 1px;
+  background: #10141c;
+  transform: rotate(-35deg);
+}
+
+.screw-tl {
+  left: 8px;
+  top: 9px;
+}
+
+.screw-tr {
+  right: 8px;
+  top: 9px;
+}
+
+.screw-bl {
+  left: 8px;
+  bottom: 9px;
+}
+
+.screw-br {
+  right: 8px;
+  bottom: 9px;
+}
+
+.radio-screen {
+  height: clamp(340px,40vh,500px);
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  padding: 17px 19px;
+  overflow: hidden;
+  border: 2px solid #0a0e15;
+  border-radius: 12px;
+  background: #0b101b;
+  box-shadow: 0 1px #b5c7da47,0 0 0 1px #b5a3dc14,-6px 0 20px #c397fa0e,6px 0 20px #a3efc514,inset 0 0 8px #000;
+}
+
+.radio-screen::before {
+  content: '';
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  pointer-events: none;
+  opacity: .06;
+  background: repeating-linear-gradient(0deg,transparent 0 3px,#050714 4px 5px);
+  mix-blend-mode: multiply;
+}
+
+.radio-screen::after {
+  content: '';
+  position: absolute;
+  z-index: 5;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 10px;
+  box-shadow: inset 0 0 35px #05080f4d,inset 0 1px #f9eaff1a;
+  background: linear-gradient(130deg,#c6caff05,transparent 35%);
+}
+
+.radio-screen .scene-base,
+.radio-screen .dynamic-bg-layer {
+  animation: none;
+  transform: none;
+}
+
+.hero-scrim {
+  background: linear-gradient(180deg,#080e2066,transparent 35%,transparent 72%,#07101c5c);
+}
+
+/* Scene labels and tuning feedback. */
+.scene-caption {
+  max-width: calc(100% - 58px);
+  min-height: 38px;
+  padding: 0 11px;
+  border: 1px solid #d7e9f726;
+  border-radius: 8px;
+  background: #101825a6;
+  color: #e2f5ef;
+  font-size: 12px;
+  letter-spacing: .15px;
+  backdrop-filter: blur(8px);
+}
+
+#sceneName {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.hero-time {
+  color: #c2d6df;
+  font-size: 12px;
+}
+
+.status-dot {
+  background: #b6fbd6;
+  box-shadow: 0 0 8px #9effcb60;
+}
+
+.screen-signature {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  pointer-events: none;
+  color: #d0deedab;
+  font-family: var(--retro-font);
+  font-size: 13px;
+  letter-spacing: 1.6px;
+  text-shadow: 0 1px 4px #0008;
+}
+
+.screen-signature>span:first-child {
+  font-size: 15px;
+  letter-spacing: 2px;
+  color: #e7e7f3a8;
+}
+
+.radio-screen .tuning-status {
+  bottom: 15px;
+  left: 18px;
+  max-width: calc(100% - 36px);
+  padding: 5px 9px;
+  border: 1px solid #afcbdd28;
+  border-radius: 5px;
+  background: #0c1423ed;
+  color: #e1f5ed;
+  font-size: 12px;
+}
+
+/* Receiver display and frequency scale. */
+.player-bar {
+  grid-template-columns: minmax(220px,1.15fr) minmax(185px,.85fr) 174px 88px;
+  padding: 18px 2px 0;
+  isolation: isolate;
+  border: 0;
+}
+
+.receiver-lcd {
+  position: relative;
+  min-width: 0;
+  min-height: 119px;
+  overflow: hidden;
+  padding: 10px 13px 11px;
+  border: 1px solid #050e0c;
+  border-radius: 7px;
+  background: linear-gradient(125deg,#14291f,#0b1c15 67%,#112219);
+  box-shadow: inset 0 1px 9px #0007,0 1px #ccd2d21f;
+}
+
+.receiver-lcd:after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .05;
+  background: repeating-linear-gradient(0deg,transparent 0 3px,#adffc7 4px);
+}
+
+.receiver-state {
+  display: flex;
+  align-items: center;
+  line-height: 1.1;
+}
+
+.receiver-light {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #7c9c87;
+  flex-shrink: 0;
+}
+
+.playing .receiver-light {
+  background: #b7ffd0;
+  box-shadow: 0 0 7px #8afbb580;
+}
+
+.station-label {
+  overflow: hidden;
+  color: #bad6c5;
+  font-size: 10px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.receiver-stereo {
+  margin-left: auto;
+  color: #a1c0ad;
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+
+.frequency-readout {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  color: var(--vfd);
+  font-family: var(--retro-font);
+  line-height: 1;
+  text-shadow: 0 0 7px #99fdb538;
+}
+
+.frequency-readout>#freqValue {
+  font-size: 42px;
+  letter-spacing: 1px;
+}
+
+.frequency-readout small {
+  color: #acd5bb;
+  font-family: 'DM Sans',sans-serif;
+  font-size: 11px;
+}
+
+.band-label {
+  margin-left: auto;
+  font-size: 22px;
+  letter-spacing: 1px;
+}
+
+.station-info h2 {
+  margin: 3px 0 0;
+  color: #e4f6eb;
+  font-size: 15px;
+  line-height: 1.35;
+  letter-spacing: -.1px;
+}
+
+.station-info p {
+  margin-top: 4px;
+  color: var(--vfd-muted);
+  font-size: 11px;
+  line-height: 1.3;
+}
+
+.frequency-dial {
+  --tuning-position: 20%;
+  position: relative;
+  margin: 8px 5px 0;
+  padding-top: 10px;
+}
+
+.frequency-dial::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: repeating-linear-gradient(90deg,#b7b8c04d 0 1px,transparent 1px 6px);
+}
+
+.frequency-scale {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #b3bac7;
+  font-family: var(--retro-font);
+  font-size: 12px;
+  line-height: 1;
+}
+
+.tuning-needle {
+  position: absolute;
+  top: -1px;
+  left: var(--tuning-position);
+  width: 2px;
+  height: 10px;
+  background: #e7bdff;
+  box-shadow: 0 0 4px #df9aff80;
+  transition: left .45s ease;
+}
+
+/* Signal meter. */
+.meter-module {
+  min-width: 0;
+  height: 119px;
+  border: 1px solid #07120d;
+  border-radius: 7px;
+  background: linear-gradient(135deg,#14231c,#0b1711);
+  box-shadow: inset 0 1px 9px #0007,0 1px #ccd2d21f;
+}
+
+.meter-caption,
+.meter-axis {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+  color: #a0c1ad;
+  font-size: 9px;
+  letter-spacing: 1px;
+  line-height: 1.2;
+}
+
+.meter-stereo {
+  color: #c5dfd0;
+}
+
+.retro-meter {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  height: 68px;
+}
+
+.meter-column {
+  --level: 0;
+  --peak-level: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-start;
+  gap: 2px;
+  width: 100%;
+  min-width: 3px;
+}
+
+.meter-segment {
+  height: 3px;
+  flex: 1;
+  max-height: 4px;
+  border-radius: 1px;
+  background: #2845357d;
+  transition: background .1s,box-shadow .1s;
+}
+
+.meter-segment.is-lit {
+  background: #b9facd;
+  box-shadow: 0 0 4px #91ffb34d;
+}
+
+.meter-segment.is-lit:nth-child(n+6) {
+  background: #7df4ab;
+}
+
+.meter-segment.is-lit:nth-child(n+10) {
+  background: #4ce992;
+  box-shadow: 0 0 5px #56ffa759;
+}
+
+.meter-peak {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(var(--peak-level) * 8.33%);
+  height: 2px;
+  background: #effff3;
+  box-shadow: 0 0 4px #aaffc95c;
+  opacity: 0;
+}
+
+.meter-peak.is-lit {
+  opacity: .65;
+}
+
+.meter-axis {
+  color: #94b39f;
+  font-size: 9px;
+  letter-spacing: .9px;
+}
+
+/* Playback actions. */
+.transport-module {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.transport-label,
+.dial-label {
+  color: #c0c4d1;
+  font-size: 9px;
+  letter-spacing: 1.4px;
+  line-height: 1.1;
+}
+
+.playback-controls {
+  gap: 7px;
+}
+
+.playback-controls .icon-button {
+  width: 44px;
+  height: 44px;
+  border: 1px solid #101722;
+  border-radius: 8px;
+  background: linear-gradient(#3c4351,#2a303b);
+  box-shadow: inset 0 1px #b3bdce26,0 2px 3px #0004;
+  color: #e3e8f0;
+  font-size: 13px;
+}
+
+.playback-controls .icon-button:hover {
+  background: linear-gradient(#4b5364,#333b48);
+  color: #fff;
+}
+
+.playback-controls .icon-button:active {
+  transform: translateY(1px);
+  box-shadow: inset 0 2px 4px #0005;
+}
+
+.play-button {
+  width: 62px;
+  height: 47px;
+  border: 1px solid #d9c5f3;
+  border-radius: 8px;
+  background: linear-gradient(#e1d0f7,#b89ad8);
+  box-shadow: inset 0 1px #fcf5ff99,0 2px 5px #0005,0 0 16px #cfa5fb10;
+  color: #2b203a;
+  font-size: 15px;
+}
+
+.play-button:hover {
+  background: linear-gradient(#eddefe,#d1b7ed);
+  box-shadow: 0 0 17px #ce9cfe24;
+}
+
+.play-button:active {
+  transform: translateY(1px);
+}
+
+.player-extras {
+  justify-content: center;
+  gap: 7px;
+}
+
+.player-extras .icon-button {
+  width: 39px;
+  height: 36px;
+  border: 1px solid #ffffff0e;
+  border-radius: 8px;
+  background: #181e289c;
+  color: #c4bfce;
+  font-size: 13px;
+}
+
+.player-extras .icon-button:hover {
+  color: #f5eafe;
+  background: #333244;
+}
+
+.player-extras #randomBtn {
+  display: inline-grid;
+}
+
+/* Volume dial and chassis signature. */
+.dial-module {
+  gap: 8px;
+  min-width: 0;
+}
+
+.dial-control {
+  --dial-angle: 0deg;
+  position: relative;
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+  border: 2px solid #111722;
+  border-radius: 50%;
+  background: repeating-conic-gradient(#4c5462 0deg 3deg,#282e38 3deg 7deg);
+  box-shadow: 0 3px 8px #0007,0 0 0 3px #1c222c,inset 0 1px #cdd6e726;
+}
+
+.dial-control:after {
+  content: '';
+  position: absolute;
+  inset: 7px;
+  pointer-events: none;
+  border: 1px solid #939cb550;
+  border-radius: 50%;
+  background: linear-gradient(135deg,#606a7d,#414958 45%,#272e3a);
+  box-shadow: inset 0 1px #d7d5e433;
+}
+
+.dial-indicator {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  pointer-events: none;
+  transform: rotate(var(--dial-angle));
+}
+
+.dial-indicator:before {
+  content: '';
+  position: absolute;
+  left: calc(50% - 1px);
+  top: 11px;
+  width: 2px;
+  height: 11px;
+  border-radius: 1px;
+  background: #efe0ff;
+  box-shadow: 0 0 5px #dca5fa66;
+}
+
+.volume-dial {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  width: 100%;
+  height: 100%!important;
+  margin: 0;
+  opacity: 0;
+  cursor: ew-resize;
+}
+
+.dial-control:focus-within {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 5px;
+}
+
+.dial-module output {
+  color: #d5c9e5;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+
+.dial-label {
+  font-size: 9px;
+}
+
+.chassis-signature {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 13px;
+  color: #a0a7b7;
+  font-size: 8px;
+  letter-spacing: 1.7px;
+}
+
+.chassis-signature>span:first-child {
+  letter-spacing: 2px;
+}
+
+/* Display effects and motion preferences. */
+.retro-effects-off .radio-screen::before,
+.retro-effects-off .radio-screen::after {
+  opacity: 0;
+}
+
+.retro-effects-off .receiver-lcd:after {
+  display: none;
+}
+
+.retro-effects-off .frequency-readout,
+.retro-effects-off .scene-caption,
+.retro-effects-off .meter-segment,
+.retro-effects-off .status-dot {
+  box-shadow: none;
+  text-shadow: none;
+}
+
+.comfort-mode .radio-screen::before,
+.reduced-motion .radio-screen::before {
+  opacity: .02;
+}
+
+/* Immersive receiver layout. */
+.focus-mode .radio-device {
+  display: flex;
+  flex-direction: column;
+  padding: 18px 24px max(15px,env(safe-area-inset-bottom));
+  background: #151a23;
+}
+
+.focus-mode .radio-screen {
+  flex: 1;
+  height: auto;
+  border-radius: 10px;
+}
+
+.focus-mode .player-bar {
+  flex-shrink: 0;
+  width: min(1120px,100%);
+  padding-top: 18px;
+}
+
+.focus-mode .chassis-signature,
+.focus-mode .chassis-screw,
+.focus-mode .radio-device::before {
+  display: none;
+}
+
+.focus-mode .scene-tools .exit-focus-button {
+  display: inline-flex;
+}
+
+/* Responsive receiver and accessibility preferences. */
+@media(min-width:1600px) {
+  .radio-device {
+    padding: 22px 26px 14px;
+  }
+  .radio-screen {
+    padding: 20px 22px;
+  }
+  .player-bar {
+    gap: 28px;
+    padding-top: 20px;
+    grid-template-columns: minmax(240px,1.15fr) minmax(200px,.85fr) 184px 96px;
+  }
+  .frequency-readout>#freqValue {
+    font-size: 45px;
+  }
+  .receiver-lcd {
+    padding: 10px 15px 11px;
+  }
+  .dial-control {
+    width: 76px;
+    height: 76px;
+  }
+  .station-info h2 {
+    font-size: 16px;
+  }
+}
+
+@media(max-width:1050px) {
+  .player-bar {
+    gap: 15px;
+    grid-template-columns: minmax(185px,1.15fr) minmax(160px,.85fr) 170px 80px;
+  }
+  .meter-module {
+    padding: 10px;
+  }
+  .retro-meter {
+    gap: 3px;
+  }
+  .meter-caption {
+    font-size: 8px;
+    letter-spacing: .6px;
+  }
+  .dial-control {
+    width: 66px;
+    height: 66px;
+  }
+  .radio-device {
+    padding: 17px 19px 12px;
+  }
+  .radio-screen {
+    padding: 15px 17px;
+  }
+}
+
+@media(max-width:880px) {
+  .player-bar {
+    grid-template-columns: minmax(0,1.15fr) minmax(0,.85fr) 84px;
+    align-items: start;
+    gap: 13px 18px;
+  }
+  .station-info {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .meter-module {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .dial-module {
+    grid-column: 3;
+    grid-row: 1;
+    align-self: center;
+  }
+  .transport-module {
+    grid-column: 1/-1;
+    grid-row: 2;
+    flex-direction: row;
+    justify-content: center;
+    gap: 25px;
+    padding-top: 2px;
+  }
+  .transport-label {
+    display: none;
+  }
+  .player-extras .icon-button {
+    width: 44px;
+    height: 44px;
+  }
+  .radio-screen {
+    height: clamp(310px,41vh,450px);
+  }
+  .focus-mode .player-bar {
+    grid-template-columns: minmax(0,1.15fr) minmax(0,.85fr) 84px;
+  }
+}
+
+@media(max-width:620px) {
+  .radio-device {
+    padding: 12px 12px 10px;
+    border-radius: 17px;
+  }
+  .radio-device::before {
+    inset: 3px;
+    border-radius: 14px;
+  }
+  .chassis-screw {
+    width: 4px;
+    height: 4px;
+  }
+  .chassis-screw:after {
+    left: 0;
+    right: 0;
+    top: 1px;
+  }
+  .screw-tl {
+    left: 4px;
+    top: 5px;
+  }
+  .screw-tr {
+    right: 4px;
+    top: 5px;
+  }
+  .screw-bl {
+    left: 4px;
+    bottom: 5px;
+  }
+  .screw-br {
+    right: 4px;
+    bottom: 5px;
+  }
+  .radio-screen {
+    height: clamp(255px,35vh,350px);
+    padding: 11px;
+    border-radius: 9px;
+  }
+  .scene-caption {
+    min-height: 38px;
+    padding: 0 9px;
+    gap: 7px;
+    font-size: 11px;
+    max-width: calc(100% - 49px);
+  }
+  .hero-time {
+    font-size: 11px;
+  }
+  .scene-caption-rule {
+    margin: 0 1px;
+  }
+  .scene-tool {
+    width: 40px;
+    height: 40px;
+  }
+  .screen-signature {
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+  .screen-signature>span:first-child {
+    font-size: 13px;
+  }
+  .radio-screen .tuning-status {
+    left: 11px;
+    bottom: 11px;
+    max-width: calc(100% - 22px);
+    font-size: 11px;
+  }
+  .player-bar {
+    grid-template-columns: minmax(0,1fr) 75px;
+    gap: 12px 13px;
+    padding: 13px 0 0;
+  }
+  .station-info {
+    grid-column: 1/-1;
+    grid-row: 1;
+  }
+  .receiver-lcd {
+    min-height: 108px;
+    padding: 10px 12px;
+  }
+  .receiver-state {
+    gap: 7px;
+  }
+  .station-label {
+    font-size: 10px;
+  }
+  .receiver-stereo {
+    font-size: 9px;
+  }
+  .frequency-readout>#freqValue {
+    font-size: 39px;
+  }
+  .frequency-readout small {
+    font-size: 11px;
+  }
+  .station-info h2 {
+    font-size: 14px;
+  }
+  .station-info p {
+    font-size: 11px;
+  }
+  .frequency-dial {
+    margin-top: 7px;
+    padding-top: 9px;
+  }
+  .frequency-scale {
+    font-size: 11px;
+  }
+  .meter-module {
+    grid-column: 1/-1;
+    grid-row: 2;
+    height: 66px;
+    padding: 8px 10px;
+  }
+  .meter-caption {
+    font-size: 8px;
+    letter-spacing: .9px;
+  }
+  .retro-meter {
+    height: 28px;
+    gap: 4px;
+    margin: 6px 0 4px;
+  }
+  .meter-column {
+    gap: 1px;
+  }
+  .meter-segment {
+    max-height: 2px;
+  }
+  .meter-axis {
+    display: none;
+  }
+  .meter-stereo {
+    font-size: 9px;
+  }
+  .transport-module {
+    grid-column: 1;
+    grid-row: 3;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 8px;
+    padding: 0;
+  }
+  .playback-controls {
+    gap: 7px;
+  }
+  .playback-controls .icon-button {
+    width: 44px;
+    height: 44px;
+    font-size: 12px;
+  }
+  .play-button {
+    width: 58px;
+    height: 48px;
+    font-size: 15px;
+  }
+  .player-extras {
+    gap: 7px;
+  }
+  .player-extras .icon-button {
+    width: 44px;
+    height: 44px;
+    font-size: 13px;
+  }
+  .dial-module {
+    grid-column: 2;
+    grid-row: 3;
+    align-self: center;
+    gap: 9px;
+  }
+  .dial-control {
+    width: 65px;
+    height: 65px;
+  }
+  .dial-label {
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+  .dial-module output {
+    font-size: 11px;
+  }
+  .chassis-signature {
+    font-size: 7px;
+    letter-spacing: 1px;
+    margin-top: 12px;
+  }
+  .focus-mode .radio-device {
+    padding: 11px 12px max(11px,env(safe-area-inset-bottom));
+  }
+  .focus-mode .radio-screen {
+    flex: 1;
+    height: auto;
+    min-height: 120px;
+  }
+  .focus-mode .player-bar {
+    grid-template-columns: minmax(0,1fr) 75px;
+    gap: 9px 13px;
+    padding-top: 12px;
+  }
+  .focus-mode .receiver-lcd {
+    min-height: 100px;
+    padding: 8px 11px;
+  }
+  .focus-mode .station-info {
+    grid-column: 1/-1;
+    grid-row: 1;
+  }
+  .focus-mode .meter-module {
+    grid-column: 1/-1;
+    grid-row: 2;
+    height: 52px;
+    padding: 6px 9px;
+  }
+  .focus-mode .retro-meter {
+    height: 20px;
+    margin: 5px 0 0;
+  }
+  .focus-mode .transport-module {
+    grid-column: 1;
+    grid-row: 3;
+  }
+  .focus-mode .dial-module {
+    grid-column: 2;
+    grid-row: 3;
+  }
+  .exit-focus-button {
+    height: 40px;
+    width: 40px;
+    padding: 0;
+  }
+  .exit-focus-button span {
+    display: none;
+  }
+  .focus-mode .scene-caption {
+    max-width: calc(100% - 96px);
+  }
+  .focus-mode .scene-caption-rule,
+  .focus-mode .hero-time {
+    display: none;
+  }
+}
+
+@media(max-width:360px) {
+  .radio-device {
+    padding: 11px 10px 9px;
+  }
+  .radio-screen {
+    height: 245px;
+    padding: 10px;
+  }
+  .scene-caption {
+    font-size: 10px;
+    gap: 6px;
+  }
+  .hero-time {
+    font-size: 10px;
+  }
+  .scene-caption-rule {
+    display: none;
+  }
+  .player-bar {
+    grid-template-columns: minmax(0,1fr) 66px;
+    gap: 11px 10px;
+  }
+  .frequency-readout>#freqValue {
+    font-size: 36px;
+  }
+  .receiver-lcd {
+    padding: 9px 10px;
+  }
+  .station-info h2 {
+    font-size: 13px;
+  }
+  .station-info p {
+    font-size: 10px;
+  }
+  .dial-control {
+    width: 59px;
+    height: 59px;
+  }
+  .playback-controls {
+    gap: 5px;
+  }
+  .play-button {
+    width: 52px;
+  }
+  .player-extras {
+    gap: 5px;
+  }
+  .chassis-signature {
+    font-size: 6px;
+    letter-spacing: 1px;
+  }
+  .focus-mode .player-bar {
+    grid-template-columns: minmax(0,1fr) 66px;
+    gap: 9px 10px;
+  }
+}
+
+@media(max-height:620px) and (min-width:700px) {
+  .focus-mode .radio-device {
+    padding: 10px 18px;
+  }
+  .focus-mode .radio-screen {
+    min-height: 90px;
+  }
+  .focus-mode .player-bar {
+    grid-template-columns: minmax(180px,1.15fr) minmax(145px,.85fr) 165px 73px;
+    gap: 14px;
+    padding-top: 12px;
+  }
+  .focus-mode .station-info {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .focus-mode .meter-module {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .focus-mode .transport-module {
+    grid-column: 3;
+    grid-row: 1;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .focus-mode .dial-module {
+    grid-column: 4;
+    grid-row: 1;
+  }
+  .focus-mode .player-extras .icon-button {
+    width: 36px;
+    height: 32px;
+  }
+  .focus-mode .receiver-lcd,
+  .focus-mode .meter-module {
+    min-height: 108px;
+    height: 108px;
+  }
+  .focus-mode .retro-meter {
+    height: 58px;
+  }
+  .focus-mode .dial-control {
+    width: 60px;
+    height: 60px;
+  }
+  .focus-mode .station-info h2 {
+    font-size: 13px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  .tuning-needle,
+  .meter-segment {
+    transition: none;
+  }
+}
+
+@media(prefers-contrast:more) {
+  .receiver-lcd,
+  .meter-module {
+    border-color: #789584;
+  }
+  .station-label,
+  .receiver-stereo,
+  .meter-caption,
+  .meter-axis {
+    color: #c8e6d3;
+  }
+  .station-info p {
+    color: #c1dfcc;
+  }
+  .radio-screen::before {
+    display: none;
+  }
+  .chassis-signature,
+  .transport-label,
+  .dial-label {
+    color: #d9deea;
+  }
+}
